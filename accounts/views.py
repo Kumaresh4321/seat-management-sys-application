@@ -4,7 +4,6 @@ from django.contrib import messages
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 
-
 # Create your views here.
 def login_user(request):
     if request.method == "POST":
@@ -13,7 +12,7 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return render(request, 'registration/index.html', {})
+            return render(request, 'admindashboard/admin_dash.html')
         else:
             messages.success(request, ("There was an error, Try again"))
             return HttpResponseRedirect(reverse('Login_user'))
