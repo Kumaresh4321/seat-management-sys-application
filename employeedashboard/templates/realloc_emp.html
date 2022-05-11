@@ -1,14 +1,14 @@
-{% load static %}
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Verticurl Employee</title>
+  <title>Reallocation Request</title>
   <!-- plugins:css -->
-  <link rel="stylesheet" href="{% static 'vendors/feather/feather.css' %}">
-  <link rel="stylesheet" href="{% static 'vendors/ti-icons/css/themify-icons.css'%} ">
+  <link rel="stylesheet" href="{% static 'vendors/feather/feather.css'%}">
+  <link rel="stylesheet" href="{% static 'vendors/ti-icons/css/themify-icons.css'%}">
   <link rel="stylesheet" href="{% static 'vendors/css/vendor.bundle.base.css'%}">
   <!-- endinject -->
   <!-- Plugin css for this page -->
@@ -28,10 +28,10 @@
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
         <a class="navbar-brand brand-logo me-5" href="/employee/"><img src="{% static 'pages/samples/images/V_red.png'%}" class="me-2" alt="logo"/></a>
-        <a class="navbar-brand brand-logo-mini" href="/employee/"><img src="{% static 'pages/samples/images/V_red.png'%}" alt="logo'%}"/></a>
+        <a class="navbar-brand brand-logo-mini" href="/employee/"><img src="{% static 'pages/samples/images/V_red.png'%}" alt="logo"/></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
-        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-bs-toggle="minimize">
           <span class="icon-menu"></span>
         </button>
         <ul class="navbar-nav mr-lg-2">
@@ -153,7 +153,7 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="/employee/">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
@@ -176,53 +176,75 @@
           <div class="row">
             <div class="col-md-12 grid-margin">
               <div class="row">
-                <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                  <h2 class="font-weight-bold">Welcome (Employee Name),</h2>
-                </div>
+
+                 <center><h2 class="font-weight-bold">Reallocation Form</h2></center>
+
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col grid-margin transparent">
-              <div class="row">
-                <div class="col mb-4 stretch-card transparent">
-                  <div class="card card-tale">
-                    <div class="card-body">
-                      <p class="mb-4">Employee ID</p>
-                      <p class="fs-30 mb-2">2613445</p>
-                      <p></p>
+          <center><div class="row">
+            <form class="needs-validation" novalidate>
+                <div class="form-row align-self-center">
+                  <div class="col-md-4 mb-3">
+                    <label class="mb-1" for="validationCustom01">Line Head's Name</label>
+                    <input type="text" class="form-control text-center" id="validationCustom01" placeholder="Line Head's Name" value="" required>
+                    <div class="valid-feedback">
+                      Looks good!
                     </div>
                   </div>
-                </div>
-                <div class="col mb-4 stretch-card transparent">
-                  <div class="card card-dark-blue">
-                    <div class="card-body">
-                      <p class="mb-4">Floor</p>
-                      <p class="fs-30 mb-2">1</p>
-                      <p></p>
+                  <div class="col-md-4 mb-3">
+                    <label class="mb-1" for="validationCustom01">Line Head's ID</label>
+                    <input type="text" class="form-control text-center" id="validationCustom02" placeholder="Line Head's ID" value="" required>
+                    <div class="valid-feedback">
+                      Looks good!
                     </div>
                   </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
-                  <div class="card card-light-blue">
-                    <div class="card-body">
-                      <p class="mb-4">Block</p>
-                      <p class="fs-30 mb-2">A</p>
-                      <p></p>
+                  <div class="form-row">
+                    <div class="col-md-4 mb-3 mt-2">
+                        <label class="mb-1" for="validationCustom01">Dept Head's Name</label>
+                      <input type="text" class="form-control text-center" id="validationCustom03" placeholder="Dept Head's Name" value="" required>
+                      <div class="valid-feedback">
+                        Looks good!
+                      </div>
                     </div>
-                  </div>
-                </div>
-                <div class="col-md-6 stretch-card transparent">
-                  <div class="card card-light-danger">
-                    <div class="card-body">
-                      <p class="mb-4">Seat Number</p>
-                      <p class="fs-30 mb-2">3424</p>
-                      <p></p>
+                    <div class="col-md-4 mb-3">
+                        <label class="mb-1" for="validationCustom01">Dept Head's ID</label>
+                      <input type="text" class="form-control text-center" id="validationCustom04" placeholder="Dept Head's ID" value="" required>
+                      <div class="valid-feedback">
+                        Looks good!
+                      </div>
                     </div>
-                  </div>
-                </div>
+                    <div class="col-md-4 mb-3 mt-2">
+                      <label class="mb-1" for="validationCustom01">Reason</label>
+                      <textarea type="text" class="form-control text-center" id="validationCustom05" placeholder="Reason" rows="10" required></textarea>
+                      <div class="valid-feedback">
+                        Looks good!
+                      </div>
+                    </div>
+                <button class="btn btn-primary" id="myButton" type="submit">Submit</button>
+              </form>
+            </center>
+
+              <script>
+              // disabling form submissions if there are invalid fields
+              (function() {
+                'use strict';
+                window.addEventListener('load', function() {
+                  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                  var forms = document.getElementsByClassName('needs-validation');
+                  // Loop over them and prevent submission
+                  var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                      if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                      }
+                      form.classList.add('was-validated');
+                    }, false);
+                  });
+                }, false);
+              })();
+              </script>
               </div>
             </div>
           </div>
@@ -241,7 +263,7 @@
   <!-- container-scroller -->
 
   <!-- plugins:js -->
-  <script src="{% static 'vendors/js/vendor.bundle.base.js'%}"></script>
+  <script src="{% static 'endors/js/vendor.bundle.base.js'%}"></script>
   <!-- endinject -->
   <!-- Plugin js for this page -->
   <script src="{% static 'vendors/chart.js/Chart.min.js'%}"></script>
