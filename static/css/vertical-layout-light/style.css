@@ -15736,7 +15736,7 @@ fieldset:disabled .wizard > .actions a,
   top: 0;
   right: 0;
   left: 0;
-  z-index: 1030;
+  z-index: 0;
 }
 
 .fixed-bottom {
@@ -15744,7 +15744,7 @@ fieldset:disabled .wizard > .actions a,
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 1030;
+  z-index: 0;
 }
 
 .sticky-top {
