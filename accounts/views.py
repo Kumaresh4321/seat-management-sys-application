@@ -13,7 +13,10 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('/employee/')
+            if user.is_staff:
+                return redirect('/employee/')
+            if user.is_superuser:
+                return redirect('/dashboard/')
         else:
             messages.success(request, ("There was an error, Try again"))
             return HttpResponseRedirect(reverse('Login_user'))
