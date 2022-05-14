@@ -3,10 +3,12 @@ from .models import Employee
 
 # Create your views here.
 def emphome(request):
-    return render(request, 'employee_dash.html', {})
+    context = displayemployee(request, request.user)
+    return render(request, 'employee_dash.html', context)
 
 def empreq(request):
-    return render(request, 'realloc_emp.html', {})
+    context = displayemployee(request, request.user)
+    return render(request, 'realloc_emp.html', context)
 
 def displayemployee(request, user):
     emp_user = user.username
