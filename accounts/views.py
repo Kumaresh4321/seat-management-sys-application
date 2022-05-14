@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 from employeedashboard.views import displayemployee
 from employeedashboard.models import Employee
+from django.views.csrf import csrf_failure
 
 # Create your views here.
 def login_user(request):
@@ -25,3 +26,11 @@ def login_user(request):
             return HttpResponseRedirect(reverse('Login_user'))
     else:
         return render(request, 'registration/login.html', {})
+
+def logout_user(request):
+    logout(request)
+    return redirect('/login/')
+
+def csrf_failure(request, reason=""):
+    #ctx = {'message': 'some custom messages'}
+    return redirect('/login/')

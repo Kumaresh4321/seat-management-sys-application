@@ -2269,7 +2269,7 @@
   /* jshint ignore:start */
   (function () {
       if (!('SVGPathSeg' in window)) {
-          // Spec: http://www.w3.org/TR/SVG11/single-page.html#paths-InterfaceSVGPathSeg
+          // Spec: http://www.w3.org/2000/svg11/single-page.html#paths-InterfaceSVGPathSeg
           window.SVGPathSeg = function (type, typeAsLetter, owningPathSegList) {
               this.pathSegType = type;
               this.pathSegTypeAsLetter = typeAsLetter;
@@ -3271,7 +3271,7 @@
               enumerable: true
           });
           // Add createSVGPathSeg* functions to window.SVGPathElement.
-          // Spec: http://www.w3.org/TR/SVG11/single-page.html#paths-Interfacewindow.SVGPathElement.
+          // Spec: http://www.w3.org/2000/svg11/single-page.html#paths-Interfacewindow.SVGPathElement.
           window.SVGPathElement.prototype.createSVGPathSegClosePath = function () {
               return new window.SVGPathSegClosePath(undefined);
           };
@@ -3331,7 +3331,7 @@
           };
           if (!('getPathSegAtLength' in window.SVGPathElement.prototype)) {
               // Add getPathSegAtLength to SVGPathElement.
-              // Spec: https://www.w3.org/TR/SVG11/single-page.html#paths-__svg__SVGPathElement__getPathSegAtLength
+              // Spec: https://www.w3.org/2000/svg11/single-page.html#paths-__svg__SVGPathElement__getPathSegAtLength
               // This polyfill requires SVGPathElement.getTotalLength to implement the distance-along-a-path algorithm.
               window.SVGPathElement.prototype.getPathSegAtLength = function (distance) {
                   if (distance === undefined || !isFinite(distance))
@@ -3353,7 +3353,7 @@
           }
       }
       if (!('SVGPathSegList' in window)) {
-          // Spec: http://www.w3.org/TR/SVG11/single-page.html#paths-InterfaceSVGPathSegList
+          // Spec: http://www.w3.org/2000/svg11/single-page.html#paths-InterfaceSVGPathSegList
           window.SVGPathSegList = function (pathElement) {
               this._pathElement = pathElement;
               this._list = this._parsePath(this._pathElement.getAttribute('d'));
@@ -3374,7 +3374,7 @@
               enumerable: true
           });
           // Add the pathSegList accessors to window.SVGPathElement.
-          // Spec: http://www.w3.org/TR/SVG11/single-page.html#paths-InterfaceSVGAnimatedPathData
+          // Spec: http://www.w3.org/2000/svg11/single-page.html#paths-InterfaceSVGAnimatedPathData
           Object.defineProperty(window.SVGPathElement.prototype, 'pathSegList', {
               get: function () {
                   if (!this._pathSegList)
@@ -3636,7 +3636,7 @@
                       command == window.SVGPathSeg.PATHSEG_MOVETO_REL);
               };
               // Parse a number from an SVG path. This very closely follows genericParseNumber(...) from Source/core/svg/SVGParserUtilities.cpp.
-              // Spec: http://www.w3.org/TR/SVG11/single-page.html#paths-PathDataBNF
+              // Spec: http://www.w3.org/2000/svg11/single-page.html#paths-PathDataBNF
               Source.prototype._parseNumber = function () {
                   var exponent = 0;
                   var integer = 0;

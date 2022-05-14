@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib.auth import logout
 from .models import Employee
 
 # Create your views here.

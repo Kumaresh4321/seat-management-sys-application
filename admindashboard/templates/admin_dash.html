@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="{% static 'vendors/feather/feather.css'%}">
   <link rel="stylesheet" href="{% static 'vendors/ti-icons/css/themify-icons.css'%}">
   <link rel="stylesheet" href="{% static 'vendors/css/vendor.bundle.base.css'%}">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   <!-- endinject -->
   <!-- Plugin css for this page -->
   <link rel="stylesheet" href="{% static 'vendors/datatables.net-bs4/dataTables.bootstrap4.css'%}">
@@ -96,7 +97,7 @@
     <div class="container-fluid page-body-wrapper">
       <!-- partial 2 :partials/_settings-panel.html -->
       <div class="theme-setting-wrapper">
-        <div id="settings-trigger"><i class="ti-settings"></i></div>
+        <div id="settings-trigger"><i class="{% static 'ti-settings'%}"></i></div>
         <div id="theme-settings" class="settings-panel">
           <i class="settings-close ti-close"></i>
           <p class="settings-heading">SIDEBAR SKINS</p>
@@ -440,7 +441,7 @@
 
   <!--Chart- Bar Chart-->
   <script src="{% static 'js/chart.js'%}"></script>
-
+ <script src="https://kit.fontawesome.com/e81d17d39f.js" crossorigin="anonymous"></script>
 </body>
 
 
