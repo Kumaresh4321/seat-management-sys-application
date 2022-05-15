@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'accounts',
     'employeedashboard',
     'admindashboard',
+    'seats',
+    'report',
+    'request_realloc',
 ]
 
 MIDDLEWARE = [
