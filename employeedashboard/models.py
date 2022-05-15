@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-
+from seats.models import Seat
 # Create your models here.
 class Employee(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
@@ -10,7 +10,11 @@ class Employee(models.Model):
     location_name = models.CharField(max_length=50)
     reporting_to = models.CharField(max_length=50)
     department_head = models.CharField(max_length=80)
-    shift = models.CharField(max_length=50)
+    shiftid = models.CharField(max_length=6, choices=(
+        ('ap', 'APAC'),
+        ('uk',  'UK'),
+    ), default='UK')
+    seat_id = models.IntegerField(null=True)
 
 
 @receiver(post_save, sender=User) #whenever there is a create event for user, create a employee object
