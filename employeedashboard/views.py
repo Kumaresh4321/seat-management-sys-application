@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.contrib.auth import logout
 from .models import Employee
 from django.contrib.auth.decorators import login_required
@@ -7,13 +7,11 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 @login_required
 def emphome(request):
-    context = displayemployee(request, request.user)
-    return render(request, 'employee_dash.html', context)
+    return render(request, 'employee_dash.html', {})
 
 @login_required
 def empreq(request):
-    context = displayemployee(request, request.user)
-    return render(request, 'realloc_emp.html', context)
+    return render(request, 'realloc_emp.html', {})
 
 @login_required
 def displayemployee(request, user):

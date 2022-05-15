@@ -4,12 +4,12 @@ from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
-@login_required
+@login_required(login_url='/accounts/login/')
 def dashboard(request):
-    context = displayemployee(request, request.user)
-    return render(request, 'admin_dash.html', context)
-    
-@login_required
+    #context = displayemployee(request, request.user)
+    return render(request, 'admin_dash.html', {})
+
+@login_required(login_url='/accounts/login/')
 def requests(request):
-    context = displayemployee(request, request.user)
-    return render(request, 'allot_req.html', context)
+    #context = displayemployee(request, request.user)
+    return render(request, 'allot_req.html', {})

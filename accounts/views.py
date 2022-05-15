@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 from employeedashboard.views import displayemployee
 from employeedashboard.models import Employee
 from django.views.csrf import csrf_failure
-
+from django.views.decorators.cache import cache_control
 # Create your views here.
 def login_user(request):
     if request.method == "POST":
@@ -16,20 +16,19 @@ def login_user(request):
         if user is not None:
             login(request, user)
             if user.is_staff:
-                context = displayemployee(request, user)
-                return render(request, 'employee_dash.html', context)
-            if user.is_superuser:
-                context = displayemployee(request, user)
-                return render(request, 'admin_dash.html', context)
+                return render(request, 'admin_dash.html', {})
+            else:
+                return render(request, 'employee_dash.html', {})
         else:
             messages.success(request, ("There was an error, Try again"))
-            return HttpResponseRedirect(reverse('Login_user'))
+            return HttpResponseRedirect('/accounts/login/')
     else:
         return render(request, 'registration/login.html', {})
 
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def logout_user(request):
     logout(request)
-    return redirect('/login/')
+    return redirect('/accounts/login/')
 
 def csrf_failure(request, reason=""):
     #ctx = {'message': 'some custom messages'}
