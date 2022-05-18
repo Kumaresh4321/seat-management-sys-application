@@ -7,6 +7,7 @@ from employeedashboard.views import displayemployee
 from employeedashboard.models import Employee
 from django.views.csrf import csrf_failure
 from django.views.decorators.cache import cache_control
+from admindashboard.views import dashboard
 # Create your views here.
 def login_user(request):
     if request.method == "POST":
@@ -16,7 +17,7 @@ def login_user(request):
         if user is not None:
             login(request, user)
             if user.is_staff:
-                return render(request, 'admin_dash.html', {})
+                return redirect ('/dashboard/')
             else:
                 return render(request, 'employee_dash.html', {})
         else:
