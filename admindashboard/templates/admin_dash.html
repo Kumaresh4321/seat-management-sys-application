@@ -35,7 +35,7 @@
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
           <span class="icon-menu"></span>
         </button>
-        <ul class="navbar-nav mr-lg-2">
+        {% comment %} <ul class="navbar-nav mr-lg-2">
           <li class="nav-item nav-search d-none d-lg-block">
             <div class="input-group">
               <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
@@ -46,7 +46,7 @@
               <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
             </div>
           </li>
-        </ul>
+        </ul> {% endcomment %}
         <ul class="navbar-nav navbar-nav-right">
           <li class="nav-item dropdown">
             <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
@@ -172,14 +172,14 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="/requests/" aria-expanded="false" aria-controls="auth">
+            <a class="nav-link" data-toggle="collapse" href="/requests/" aria-expanded="false" aria-controls="auth">
               <i class="icon-head menu-icon"></i>
               <span class="menu-title">Allotment Requests</span>
             </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#ui-advanced" aria-expanded="false" aria-controls="ui-advanced">
+            <a class="nav-link" data-toggle="collapse" href="#ui-advanced" aria-expanded="false" aria-controls="ui-advanced">
               <i class="icon-paper menu-icon"></i>
               <span class="menu-title">Report</span>
               <!--<i class="menu-arrow"></i>-->
@@ -219,7 +219,7 @@
                             </div>
                           <div class="col-md-12 col-xl-9">
                           <!--  <div class="row"> -->
-                              <div class="col-md-6" align="center">
+                              <div class="col-md-9 border-right">
                                 <div class="table-responsive mb-3 mb-md-0 mt-3">
                                   <table class="table table-borderless report-table">
                                     <tr>
@@ -302,7 +302,7 @@
                             </div>
                           <div class="col-md-12 col-xl-9">
                             <div class="row">
-                              <div class="col-md-6 border-right">
+                              <div class="col-md-9 border-right">
                                 <div class="table-responsive mb-3 mb-md-0 mt-3">
                                   <table class="table table-borderless report-table">
                                     <tr>
@@ -363,8 +363,6 @@
                                 </div>
                               </div>
                               <div class="col-md-6 mt-3">
-                                <canvas id="south-america-chart"></canvas>
-                                <div id="south-america-legend"></div>
                               </div>
                             </div>
                           </div>
@@ -381,26 +379,6 @@
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <p class="card-title">Allotment Details</p>
-                  <p class="font-weight-500"></p>
-                    <canvas id="barChart"></canvas>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Request Status</h4>
-                  <div id="morris-donut-example"></div>
-                </div>
-              </div>
-            </div>
             </div>
           </div>
 
@@ -438,15 +416,7 @@
   <script src="{% static 'js/dashboard.js'%}"></script>
   <script src="{% static 'js/Chart.roundedBarCharts.js'%}"></script>
   <!-- End custom js for this page-->
-
-  <!--Chart-Doughnut-->
-  <script src="{% static 'vendors/raphael/raphael.min.js'%}"></script>
-  <script src="{% static 'vendors/morris.js/morris.min.js'%}"></script>
-  <script src="{% static 'js/morris.js'%}"></script>
-
-  <!--Chart- Bar Chart-->
-  <script src="{% static 'js/chart.js'%}"></script>
- <script src="https://kit.fontawesome.com/e81d17d39f.js" crossorigin="anonymous"></script>
+  
 </body>
 
 

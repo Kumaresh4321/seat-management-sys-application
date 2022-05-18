@@ -33,7 +33,7 @@
             <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
               <span class="icon-menu"></span>
             </button>
-            <ul class="navbar-nav mr-lg-2">
+            {% comment %} <ul class="navbar-nav mr-lg-2">
               <li class="nav-item nav-search d-none d-lg-block">
                 <div class="input-group">
                   <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
@@ -44,7 +44,7 @@
                   <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
                 </div>
               </li>
-            </ul>
+            </ul> {% endcomment %}
             <ul class="navbar-nav navbar-nav-right">
               <li class="nav-item dropdown">
                 <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
@@ -174,7 +174,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#ui-advanced" aria-expanded="false" aria-controls="ui-advanced">
+            <a class="nav-link" data-bs-toggle="collapse" href="/reports/" aria-expanded="false" aria-controls="ui-advanced">
               <i class="icon-paper menu-icon"></i>
               <span class="menu-title">Reports</span>
               <!--<i class="menu-arrow"></i>-->

@@ -1,8 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from employeedashboard.views import displayemployee
 from django.contrib.auth.decorators import login_required
 from employeedashboard.models import Employee
 from seats.models import Seat
+from io import BytesIO
+from reportlab.pdfgen import canvas
+from django.http import HttpResponse
+from reportlab.lib.pagesizes import letter, landscape
+from reportlab.lib.pagesizes import A4
+#from datetime import today
 
 departments = ['Marketing', 'Operations', 'Finance', 'Sales', 'Human Resources', 'Technical']
 
@@ -33,3 +39,41 @@ def returnstats(request):
     'floor1_technical': floor1_progress[5],
     }
     return context
+
+@login_required
+def reports(request):
+    return render(request, 'reports.html', {})
+
+@login_required
+def generate_pdf(request):
+    response = HttpResponse(content_type='application/pdf')
+    #d = datetime.today().strftime('%Y-\m-%d')
+    #response['Content-Disposition'] = f'inline; filename="{d}.pdf"'
+
+    buffer = BytesIO()
+    p = canvas.Canvas(buffer, pagesize = A4)
+
+    data = returnstats(request)
+
+    p.setFont("Helvetica", 15, leading=None)
+    p.drawString(260, 800, "Seat Management System")
+    p.line(0, 780, 1000, 780)
+    p.line(0, 778, 1000, 778)
+    x1 = 20
+    y1 = 750
+
+    for key, value in data.items():
+        p.setFont("Helvetica", 15, leading=None)
+        p.drawString(x1, y1-12, f"{key}")
+        p.drawString(x1, y1-32, f"{value}")
+        y1 = y1-60
+
+    #p.setTitle(f'Report on {d}')
+    p.showPage()
+    p.save()
+
+    pdf = buffer.getvalue()
+    buffer.close()
+    response.write(pdf)
+
+    return response

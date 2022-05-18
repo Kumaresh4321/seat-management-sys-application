@@ -5,10 +5,10 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Verticurl Employee</title>
+  <title>Verticurl Reports</title>
   <!-- plugins:css -->
-  <link rel="stylesheet" href="{% static 'vendors/feather/feather.css' %}">
-  <link rel="stylesheet" href="{% static 'vendors/ti-icons/css/themify-icons.css'%} ">
+  <link rel="stylesheet" href="{% static 'vendors/feather/feather.css'%}">
+  <link rel="stylesheet" href="{% static 'vendors/ti-icons/css/themify-icons.css'%}">
   <link rel="stylesheet" href="{% static 'vendors/css/vendor.bundle.base.css'%}">
   <!-- endinject -->
   <!-- Plugin css for this page -->
@@ -27,14 +27,14 @@
     <!-- partial 1 :partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
-        <a class="navbar-brand brand-logo me-5" href="/employee/"><img src="{% static 'pages/samples/images/V_red.png'%}" class="me-2" alt="logo"/></a>
-        <a class="navbar-brand brand-logo-mini" href="/employee/"><img src="{% static 'pages/samples/images/V_red.png'%}" alt="logo'%}"/></a>
+        <a class="navbar-brand brand-logo me-5" href="/dashboard/"><img src="{% static 'pages/samples/images/V_red.png'%}" class="me-2" alt="logo"/></a>
+        <a class="navbar-brand brand-logo-mini" href="/dashboard/"><img src="{% static 'pages/samples/images/V_red.png'%}" alt="logo"/></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
           <span class="icon-menu"></span>
         </button>
-        {% comment %} <ul class="navbar-nav mr-lg-2">
+        <!-- <ul class="navbar-nav mr-lg-2">
           <li class="nav-item nav-search d-none d-lg-block">
             <div class="input-group">
               <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
@@ -45,7 +45,7 @@
               <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
             </div>
           </li>
-        </ul> {% endcomment %}
+        </ul> -->
         <ul class="navbar-nav navbar-nav-right">
           <li class="nav-item dropdown">
             <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
@@ -61,7 +61,7 @@
                   </div>
                 </div>
                 <div class="preview-item-content">
-                  <h6 class="preview-subject font-weight-normal">Request Status</h6>
+                  <h6 class="preview-subject font-weight-normal">New Allotment Request</h6>
                   <p class="font-weight-light small-text mb-0 text-muted">
                     Just now
                   </p>
@@ -74,14 +74,14 @@
               <img src="{% static 'images/faces/face28.jpg'%}" alt="profile"/>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item" method = "post" href="/logout">
-                <i class="ti-power-off text-primary" name="logout_btn"></i>
+              <a class="dropdown-item">
+                <i class="ti-power-off text-primary"></i>
                 Logout
               </a>
             </div>
           </li>
           <li class="nav-item nav-settings d-none d-lg-flex">
-            <a class="nav-link">
+            <a class="nav-link" href="#">
               <i class="icon-ellipsis"></i>
             </a>
           </li>
@@ -153,17 +153,34 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="/dashboard/">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="/seatrequests/" aria-expanded="false" aria-controls="maps">
+            <a class="nav-link" data-bs-toggle="collapse" href="#maps" aria-expanded="false" aria-controls="maps">
               <i class="icon-map menu-icon"></i>
-              <span class="menu-title">Reallocation Request</span>
+              <span class="menu-title">Floor Plan</span>
+            </a>
+            <div class="collapse" id="maps">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="">Floor 1</a></li>
+                <li class="nav-item"> <a class="nav-link" href="">Floor 2</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="/requests/" aria-expanded="false" aria-controls="auth">
+              <i class="icon-head menu-icon"></i>
+              <span class="menu-title">Allotment Requests</span>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="reports.html" aria-expanded="false" aria-controls="ui-advanced">
+              <i class="icon-paper menu-icon"></i>
+              <span class="menu-title">Reports</span>
               <!--<i class="menu-arrow"></i>-->
             </a>
           </li>
@@ -174,59 +191,50 @@
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
-            <div class="col-md-12 grid-margin">
-              <div class="row">
-                <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                  <h2 class="font-weight-bold">Welcome {{user.get_full_name}},</h2>
+            <center><form>
+                <div class="form-group col-md-4">
+                  <label for="exampleFormControlSelect1">Time</label>
+                  <select class="form-control col-md-4" id="exampleFormControlSelect1">
+                    <option>Weekly</option>
+                    <option>Monthly</option>
+                    <option>Quaterly</option>
+                    <option>Yearly</option>
+                  </select>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col grid-margin transparent">
-              <div class="row">
-                <div class="col mb-4 stretch-card transparent">
-                  <div class="card card-tale">
-                    <div class="card-body">
-                      <p class="mb-4">Employee ID</p>
-                      <p class="fs-30 mb-2">{{user.username}}</p>
-                      <p></p>
-                    </div>
+
+                <div class="form-group col-md-4">
+                    <label for="exampleFormControlSelect1">Floor</label>
+                    <select class="form-control col-md-4" id="exampleFormControlSelect1">
+                      <option>1</option>
+                      <option>2</option>
+                    </select>
                   </div>
-                </div>
-                <div class="col mb-4 stretch-card transparent">
-                  <div class="card card-dark-blue">
-                    <div class="card-body">
-                      <p class="mb-4">Floor</p>
-                      <p class="fs-30 mb-2">1</p>
-                      <p></p>
-                    </div>
+
+                  <div class="form-group col-md-4">
+                    <label for="exampleFormControlSelect1">Tower</label>
+                    <select class="form-control col-md-4" id="exampleFormControlSelect1">
+                      <option>A</option>
+                      <option>B</option>
+                    </select>
                   </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
-                  <div class="card card-light-blue">
-                    <div class="card-body">
-                      <p class="mb-4">Block</p>
-                      <p class="fs-30 mb-2">A</p>
-                      <p></p>
-                    </div>
+
+                  <div class="form-group col-md-4">
+                    <label for="exampleFormControlSelect1">Department</label>
+                    <select class="form-control col-md-4" id="exampleFormControlSelect1">
+                      <option>Marketing</option>
+                      <option>Operations</option>
+                      <option>Finance</option>
+                      <option>Sales</option>
+                      <option>Human Resources</option>
+                      <option>Techincal</option>
+                      <option>All</option>
+                    </select>
                   </div>
-                </div>
-                <div class="col-md-6 stretch-card transparent">
-                  <div class="card card-light-danger">
-                    <div class="card-body">
-                      <p class="mb-4">Seat Number</p>
-                      <p class="fs-30 mb-2">3424</p>
-                      <p></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+                  <a href="{% url 'generate_pdf' %}" target="_blank" class="btn btn-primary" id="myButton" type="submit">Generate</a>
+              </form></center>
           </div>
         </div>
+      </div>
 
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
