@@ -75,7 +75,7 @@
               <img src="{% static 'images/faces/face28.jpg'%}" alt="profile"/>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item" method = "post" href="/logout">
+              <a class="dropdown-item" method = "post" href="{%url 'logout'%}">
                 <i class="ti-power-off text-primary"></i>
                 Logout
               </a>
@@ -179,7 +179,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#ui-advanced" aria-expanded="false" aria-controls="ui-advanced">
+            <a class="nav-link" data-toggle="collapse" href="/reports/" aria-expanded="false" aria-controls="ui-advanced">
               <i class="icon-paper menu-icon"></i>
               <span class="menu-title">Report</span>
               <!--<i class="menu-arrow"></i>-->
@@ -204,9 +204,9 @@
             <div class="col-md-12 grid-margin stretch-card">
               <div class="card position-relative">
                 <div class="card-body">
+                  <a href="{% url 'dashboard'%}">
                   <div id="detailedReports" class="carousel slide detailed-report-carousel position-static pt-2" data-bs-ride="carousel">
                     <div class="carousel-inner">
-                      <a href="{% url 'dashboard'%}">
                       <div class="carousel-item active">
                         <div class="row">
                           <div class="col-md-12 col-xl-3 d-flex flex-column justify-content-start">
@@ -288,8 +288,6 @@
                           </div>
                         </div>
                       </div>
-                    </a>
-                    <a href="{% url 'dashboard'%}">
                       <div class="carousel-item">
                         <div class="row">
                           <div class="col-md-12 col-xl-3 d-flex flex-column justify-content-start">
@@ -368,7 +366,6 @@
                           </div>
                         </div>
                       </div>
-                    </a>
                     </div>
                     <a class="carousel-control-prev" href="#detailedReports" role="button" data-bs-slide="prev">
                       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -377,6 +374,7 @@
                       <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     </a>
                   </div>
+                </a>
                 </div>
               </div>
             </div>
@@ -416,7 +414,7 @@
   <script src="{% static 'js/dashboard.js'%}"></script>
   <script src="{% static 'js/Chart.roundedBarCharts.js'%}"></script>
   <!-- End custom js for this page-->
-  
+
 </body>
 
 

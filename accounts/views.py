@@ -9,6 +9,7 @@ from django.views.csrf import csrf_failure
 from django.views.decorators.cache import cache_control
 from admindashboard.views import dashboard
 # Create your views here.
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def login_user(request):
     if request.method == "POST":
         username = request.POST['username']
@@ -29,7 +30,8 @@ def login_user(request):
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def logout_user(request):
     logout(request)
-    return redirect('/accounts/login/')
+    csrf_failure(request)
+    return redirect('/login/')
 
 def csrf_failure(request, reason=""):
     #ctx = {'message': 'some custom messages'}

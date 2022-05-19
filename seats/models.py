@@ -4,8 +4,8 @@ from django.db.models import Value
 
 class Seat(models.Model):
     seat_number = models.IntegerField()
-    floor_number = models.CharField(max_length=6, choices=(('1','One'),
-    ('2', 'Two')))
+    floor_number = models.CharField(max_length=6, choices=(('One','One'),
+    ('One', 'Two')))
     tower_id = models.CharField(max_length=6, choices=(('A', 'Tower A'),('B', 'Tower B')))
     state = models.CharField(max_length=6, choices=(
         ('oc','Occupied'),
