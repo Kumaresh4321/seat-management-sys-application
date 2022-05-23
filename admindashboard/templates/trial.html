@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset = "utf-8">
+  <title>SVG</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+ <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+</head>
+<body>
+  <div class="container">
+  <div id="trial" class="col-sm-6">
+
+    </div>
+    </div>
+    <script>
+          $(document).ready(function(){
+            $("#trial").load("towera.svg", function(){
+                $("#trial svg").css("max-height", "450px");
+                
+              $("#towera").click(function(evt){
+                
+                
+                switch(evt.target.id){
+    
+                  case "seat1":
+                      console.log("1")
+                    break;
+                  case "seat3":
+                      console.log("3")
+                    break;
+                  case "seat4":
+                    console.log("4")
+                    break;
+                  case "seat2":
+                    console.log("2")
+                    break;
+                  default:
+                    break;
+                }
+              });
+
+            });
+          });
+      </script>
+</body>
+</html>

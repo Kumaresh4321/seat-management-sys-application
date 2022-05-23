@@ -135,3 +135,9 @@ def generate_pdf(request):
     response.write(pdf)
 
     return response
+@login_required()
+def viewfloor1(request):
+    return render(request, 'trial.html', {})
+
+def loadsvg(request):
+    return render(request, 'towera.svg', {})
