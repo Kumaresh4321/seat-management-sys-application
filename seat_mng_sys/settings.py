@@ -46,10 +46,16 @@ INSTALLED_APPS = [
     'accounts',
     'employeedashboard',
     'admindashboard',
+    'crispy_forms',
+    'crispy_bootstrap5',
     'seats',
     'report',
     'request_realloc',
 ]
+
+CROSPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',

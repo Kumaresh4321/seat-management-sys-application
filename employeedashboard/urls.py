@@ -1,7 +1,6 @@
 from django.urls import path, include
-from .views import emphome, empreq
+from .views import emphome
 
 urlpatterns = [
     path('employee/', emphome),
-    path('seatrequests/', empreq)
 ]

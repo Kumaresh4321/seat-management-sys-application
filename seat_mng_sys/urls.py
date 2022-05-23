@@ -23,6 +23,7 @@ urlpatterns=[
     path('', include('accounts.urls')),
     path('', include('employeedashboard.urls')),
     path('', include('pages.urls')),
-    path('', include('admindashboard.urls'))
-
+    path('', include('admindashboard.urls')),
+    path('', include('report.urls')),
+    path('', include('request_realloc.urls'))
 ]
