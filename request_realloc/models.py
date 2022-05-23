@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class rel_request(models.Model):
-    request_id =models.CharField(max_length=50, unique=True)
+    request_id =models.AutoField(primary_key=True)
     lh_name=models.CharField(max_length=50)
     lh_id=models.CharField(max_length=50)
     dh_name=models.CharField(max_length=50)
