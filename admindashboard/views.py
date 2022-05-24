@@ -155,8 +155,10 @@ def viewseatinfo(request):
     # context = json.loads()
     # print(context)
     context = {}
-    info = request.POST.get('seat_number')
-    context['seat_number'] = info[4:]
+    info = request.POST.get('seat_number')[4:]
+    context['seat_number'] = info
+    st = Seat.objects.filter(auto_increment_id = info)
+    context['seat_status'] = st[0].state
     return render(request, 'seatinfo.html', context)
 
 def loadsvg(request):

@@ -282,7 +282,7 @@
             function (data, status, jqXGR) {  
               $.ajax({
                 type: 'POST',
-                url: '/viewfloor1/',
+                url: '/viewseatinfo/',
                 data: {
                   seat_number: evt.target.id,
                   csrfmiddlewaretoken: '{{ csrf_token }}'
