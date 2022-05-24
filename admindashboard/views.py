@@ -156,7 +156,7 @@ def viewseatinfo(request):
     # print(context)
     context = {}
     info = request.POST.get('seat_number')
-    context['seat_number'] = info
+    context['seat_number'] = info[4:]
     return render(request, 'seatinfo.html', context)
 
 def loadsvg(request):
