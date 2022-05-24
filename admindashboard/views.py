@@ -9,7 +9,9 @@ from django.http import HttpResponse
 from reportlab.lib.pagesizes import letter, landscape
 from reportlab.lib.pagesizes import A4
 from datetime import datetime
+import json
 
+# json_serializer = serializers.get_serializer("json")
 departments = ['Marketing', 'Operations', 'Finance', 'Sales', 'Human Resources', 'Technical']
 
 # Create your views here.
@@ -150,9 +152,12 @@ def viewfloor1(request):
 
 
 def viewseatinfo(request):
+    # context = json.loads()
+    # print(context)
+    context = {}
+    info = request.POST.get('seat_number')
     context['seat_number'] = info
-    print(context)
-    return render(request, 'floor.html', context)
+    return render(request, 'seatinfo.html', context)
 
 def loadsvg(request):
     return render(request, 'towera.svg', {})
