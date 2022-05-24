@@ -1,3 +1,4 @@
+{%load static%}
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,33 +15,41 @@
 </head>
 <body>
   <div class="container">
-  <div id="trial" class="col-sm-6">
+    <!-- <div class="row"> -->
+      <div class="col-md-140 col-xl-35">
+        <div class="ml-xl-4 mt-3">
+          <div id="trial" class="col-sm-70">
+            {%csrf_token%}
+    </div>
 
     </div>
+  </div>
+    <div class="col-md-140 col-xl-70">
+    <div class="ml-xl-4 mt-9">
+    <div id = "formtest" class="col-sm-70">
+      <h1> Seat info </h1>
+      <h2> Seat Number </h2>
+      <h2> Seat number is: {{ seat_number }} <h2>
+      <h2> Seat status </h2>
+      <p> {{seat_status}} </p>
     </div>
+  </div>
+  </div>
+<!-- </div> -->
+</div>
     <script>
           $(document).ready(function(){
             $("#trial").load("towera.svg", function(){
                 $("#trial svg").css("max-height", "450px");
-                
               $("#towera").click(function(evt){
-                
-                
                 switch(evt.target.id){
-    
-                  case "seat1":
-                      console.log("1")
-                    break;
-                  case "seat3":
-                      console.log("3")
-                    break;
-                  case "seat4":
-                    console.log("4")
-                    break;
-                  case "seat2":
-                    console.log("2")
-                    break;
                   default:
+                    $.ajax({
+                      type: 'POST',
+                      url: '/viewfloor1/',
+                      data: {"seat_number": evt.target.id,
+                      csrfmiddlewaretoken: '{{ csrf_token }}'},
+                    });
                     break;
                 }
               });

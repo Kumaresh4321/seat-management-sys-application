@@ -38,6 +38,7 @@ def returnstats(request):
     'floor1_hr': floor1_progress[4],
     'floor1_technical': floor1_progress[5],
     }
+    print(context)
     return context
 
 @login_required(login_url='/login/')
@@ -135,9 +136,23 @@ def generate_pdf(request):
     response.write(pdf)
 
     return response
+
 @login_required()
 def viewfloor1(request):
-    return render(request, 'trial.html', {})
+    context = {}
+    info = request.POST.get('seat_number')
+    context['seat_number'] = info
+    if context is None:
+        return render(request, 'floor.html', {})
+    else:
+        print(context)
+        return render(request, 'floor.html', context)
+
+
+def viewseatinfo(request):
+    context['seat_number'] = info
+    print(context)
+    return render(request, 'floor.html', context)
 
 def loadsvg(request):
     return render(request, 'towera.svg', {})
