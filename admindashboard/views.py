@@ -159,6 +159,8 @@ def viewseatinfo(request):
     context['seat_number'] = info
     st = Seat.objects.filter(auto_increment_id = info)
     context['seat_status'] = st[0].state
+    context['seat_department_name'] = st[0].department_name
+    context['seat_shiftid'] = st[0].shiftid
     return render(request, 'seatinfo.html', context)
 
 def loadsvg(request):
