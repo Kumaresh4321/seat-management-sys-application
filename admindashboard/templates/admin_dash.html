@@ -191,6 +191,7 @@
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
+          <!-- Welcome user -->
           <div class="row">
             <div class="col-md-12 grid-margin">
               <div class="row">
@@ -200,6 +201,7 @@
               </div>
             </div>
           </div>
+<!-- Unoccupied Seats card -->
           <div class="row">
             <div class="col-md-12 grid-margin stretch-card">
               <div class="card position-relative">
@@ -211,7 +213,187 @@
                         <div class="row">
                           <div class="col-md-12 col-xl-3 d-flex flex-column justify-content-start">
                             <div class="ml-xl-4 mt-3">
-                            <p class="card-title">{{reportname}}</p>
+                            <p class="card-title">{{reportname_2}}</p>
+                              <h1 class="text-primary">1st</h1>
+                              <h3 class="font-weight-500 mb-xl-4 text-primary">FLOOR</h3>
+                              <p class="mb-2 mb-xl-0"></p>
+                            </div>
+                            </div>
+                          <div class="col-md-12 col-xl-9">
+                          <!--  <div class="row"> -->
+                              <div class="col-md-9 border-right">
+                                <div class="table-responsive mb-3 mb-md-0 mt-3">
+                                  <table class="table table-borderless report-table">
+                                    <tr>
+                                      <td class="text-muted">Marketing</td>
+                                      <td class="w-100 px-0">
+                                        <div class="progress progress-md mx-4">
+                                          <div class="progress-bar bg-primary" role="progressbar" style="width: {{floor1_marketing_un}}%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                      </td>
+                                      <td><h5 class="font-weight-bold mb-0">{{floor1_marketing_un}}%</h5></td>
+                                    </tr>
+                                    <tr>
+                                      <td class="text-muted">Operations</td>
+                                      <td class="w-100 px-0">
+                                        <div class="progress progress-md mx-4">
+                                          <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"
+                                          style="width: {{floor1_operations_un}}%"></div>
+                                        </div>
+                                      </td>
+                                      <td><h5 class="font-weight-bold mb-0">{{floor1_operations_un}}%</h5></td>
+                                    </tr>
+                                    <tr>
+                                      <td class="text-muted">Finance</td>
+                                      <td class="w-100 px-0">
+                                        <div class="progress progress-md mx-4">
+                                          <div class="progress-bar bg-danger" role="progressbar" style="width: {{floor1_finance_un}}%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                      </td>
+                                      <td><h5 class="font-weight-bold mb-0">{{floor1_finance_un}}%</h5></td>
+                                    </tr>
+                                    <tr>
+                                      <td class="text-muted">Sales</td>
+                                      <td class="w-100 px-0">
+                                        <div class="progress progress-md mx-4">
+                                          <div class="progress-bar bg-info" role="progressbar" style="width: {{floor1_sales_un}}%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                      </td>
+                                      <td><h5 class="font-weight-bold mb-0">{{floor1_sales_un}}%</h5></td>
+                                    </tr>
+                                    <tr>
+                                      <td class="text-muted">Human Resources</td>
+                                      <td class="w-100 px-0">
+                                        <div class="progress progress-md mx-4">
+                                          <div class="progress-bar bg-primary" role="progressbar" style="width: {{floor1_hr_un}}" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                      </td>
+                                      <td><h5 class="font-weight-bold mb-0">{{floor1_hr_un}}%</h5></td>
+                                    </tr>
+                                    <tr>
+                                      <td class="text-muted">Technical</td>
+                                      <td class="w-100 px-0">
+                                        <div class="progress progress-md mx-4">
+                                          <div class="progress-bar bg-danger" role="progressbar" style="width: {{floor1_technical_un}}" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                      </td>
+                                      <td><h5 class="font-weight-bold mb-0">{{floor1_technical_un}}%</h5></td>
+                                    </tr>
+                                  </table>
+                                </div>
+                            <!--  </div>
+                              <div class="col-md-6 mt-3">
+                                <canvas id="north-america-chart"></canvas>
+                                <div id="north-america-legend"></div> -->
+                              </div>
+                          <!--  </div> -->
+                          </div>
+                        </div>
+                      </div>
+                      <div class="carousel-item">
+                        <div class="row">
+                          <div class="col-md-12 col-xl-3 d-flex flex-column justify-content-start">
+                            <div class="ml-xl-4 mt-3">
+                            <p class="card-title">{{reportname_2}}</p>
+                              <h1 class="text-primary">2nd</h1>
+                              <h3 class="font-weight-500 mb-xl-4 text-primary">FLOOR</h3>
+                              <p class="mb-2 mb-xl-0"></p>
+                            </div>
+                            </div>
+                          <div class="col-md-12 col-xl-9">
+                            <div class="row">
+                              <div class="col-md-9 border-right">
+                                <div class="table-responsive mb-3 mb-md-0 mt-3">
+                                  <table class="table table-borderless report-table">
+                                    <tr>
+                                      <td class="text-muted">Marketing</td>
+                                      <td class="w-100 px-0">
+                                        <div class="progress progress-md mx-4">
+                                          <div class="progress-bar bg-primary" role="progressbar" style="width: {{floor1_marketing_un}}%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                      </td>
+                                      <td><h5 class="font-weight-bold mb-0">{{floor1_marketing_un}}%</h5></td>
+                                    </tr>
+                                    <tr>
+                                      <td class="text-muted">Operations</td>
+                                      <td class="w-100 px-0">
+                                        <div class="progress progress-md mx-4">
+                                          <div class="progress-bar bg-warning" role="progressbar" style="width: {{floor1_operations_un}}%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                      </td>
+                                      <td><h5 class="font-weight-bold mb-0">{{floor1_operations_un}}%</h5></td>
+                                    </tr>
+                                    <tr>
+                                      <td class="text-muted">Finance</td>
+                                      <td class="w-100 px-0">
+                                        <div class="progress progress-md mx-4">
+                                          <div class="progress-bar bg-danger" role="progressbar" style="width: {{floor1_finance_un}}%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                      </td>
+                                      <td><h5 class="font-weight-bold mb-0">{{floor1_finance_un}}%</h5></td>
+                                    </tr>
+                                    <tr>
+                                      <td class="text-muted">Sales</td>
+                                      <td class="w-100 px-0">
+                                        <div class="progress progress-md mx-4">
+                                          <div class="progress-bar bg-info" role="progressbar" style="width: {{floor1_sales_un}}%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                      </td>
+                                      <td><h5 class="font-weight-bold mb-0">{{floor1_sales_un}}%</h5></td>
+                                    </tr>
+                                    <tr>
+                                      <td class="text-muted">Human Resources</td>
+                                      <td class="w-100 px-0">
+                                        <div class="progress progress-md mx-4">
+                                          <div class="progress-bar bg-primary" role="progressbar" style="width: {{floor1_hr_un}}%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                      </td>
+                                      <td><h5 class="font-weight-bold mb-0">{{floor1_hr_un}}%</h5></td>
+                                    </tr>
+                                    <tr>
+                                      <td class="text-muted">Technical</td>
+                                      <td class="w-100 px-0">
+                                        <div class="progress progress-md mx-4">
+                                          <div class="progress-bar bg-danger" role="progressbar" style="width: {{floor1_operation_uns}}%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                      </td>
+                                      <td><h5 class="font-weight-bold mb-0">{{floor1_technical_un}}%</h5></td>
+                                    </tr>
+                                  </table>
+                                </div>
+                              </div>
+                              <div class="col-md-6 mt-3">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- <a class="carousel-control-prev" href="#detailedReports" role="button" data-bs-slide="prev"> -->
+                      <!-- <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
+                    <!-- </a> -->
+                    <!-- <a class="carousel-control-next" href="#detailedReports" role="button" data-bs-slide="next"> -->
+                      <!-- <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
+                    </a>
+                  </div>
+                </a>
+                </div>
+              </div>
+            </div>
+          </div>
+<!-- Occupied Seats card -->
+          <div class = "row">
+            <div class="col-md-12 grid-margin stretch-card">
+              <div class="card position-relative">
+                <div class="card-body">
+                  <a href="{% url 'dashboard'%}">
+                  <div id="detailedReports" class="carousel slide detailed-report-carousel position-static pt-2" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                      <div class="carousel-item active">
+                        <div class="row">
+                          <div class="col-md-12 col-xl-3 d-flex flex-column justify-content-start">
+                            <div class="ml-xl-4 mt-3">
+                            <p class="card-title">{{reportname_1}}</p>
                               <h1 class="text-primary">1st</h1>
                               <h3 class="font-weight-500 mb-xl-4 text-primary">FLOOR</h3>
                               <p class="mb-2 mb-xl-0"></p>
@@ -379,7 +561,186 @@
               </div>
             </div>
           </div>
-
+<!-- Buffer Seats Card -->
+<div class = "row">
+  <div class="col-md-12 grid-margin stretch-card">
+    <div class="card position-relative">
+      <div class="card-body">
+        <a href="{% url 'dashboard'%}">
+        <div id="detailedReports" class="carousel slide detailed-report-carousel position-static pt-2" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="row">
+                <div class="col-md-12 col-xl-3 d-flex flex-column justify-content-start">
+                  <div class="ml-xl-4 mt-3">
+                  <p class="card-title">{{reportname_3}}</p>
+                    <h1 class="text-primary">1st</h1>
+                    <h3 class="font-weight-500 mb-xl-4 text-primary">FLOOR</h3>
+                    <p class="mb-2 mb-xl-0"></p>
+                  </div>
+                  </div>
+                <div class="col-md-12 col-xl-9">
+                <!--  <div class="row"> -->
+                    <div class="col-md-9 border-right">
+                      <div class="table-responsive mb-3 mb-md-0 mt-3">
+                        <table class="table table-borderless report-table">
+                          <tr>
+                            <td class="text-muted">Marketing</td>
+                            <td class="w-100 px-0">
+                              <div class="progress progress-md mx-4">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: {{floor1_marketing_buf}}%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                              </div>
+                            </td>
+                            <td><h5 class="font-weight-bold mb-0">{{floor1_marketing_buf}}%</h5></td>
+                          </tr>
+                          <tr>
+                            <td class="text-muted">Operations</td>
+                            <td class="w-100 px-0">
+                              <div class="progress progress-md mx-4">
+                                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"
+                                style="width: {{floor1_operations_buf}}%"></div>
+                              </div>
+                            </td>
+                            <td><h5 class="font-weight-bold mb-0">{{floor1_operations_buf}}%</h5></td>
+                          </tr>
+                          <tr>
+                            <td class="text-muted">Finance</td>
+                            <td class="w-100 px-0">
+                              <div class="progress progress-md mx-4">
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: {{floor1_finance_buf}}%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+                              </div>
+                            </td>
+                            <td><h5 class="font-weight-bold mb-0">{{floor1_finance_buf}}%</h5></td>
+                          </tr>
+                          <tr>
+                            <td class="text-muted">Sales</td>
+                            <td class="w-100 px-0">
+                              <div class="progress progress-md mx-4">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{floor1_sales_buf}}%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                              </div>
+                            </td>
+                            <td><h5 class="font-weight-bold mb-0">{{floor1_sales_buf}}%</h5></td>
+                          </tr>
+                          <tr>
+                            <td class="text-muted">Human Resources</td>
+                            <td class="w-100 px-0">
+                              <div class="progress progress-md mx-4">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: {{floor1_hr_buf}}" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                              </div>
+                            </td>
+                            <td><h5 class="font-weight-bold mb-0">{{floor1_hr_buf}}%</h5></td>
+                          </tr>
+                          <tr>
+                            <td class="text-muted">Technical</td>
+                            <td class="w-100 px-0">
+                              <div class="progress progress-md mx-4">
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: {{floor1_technical_buf}}" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                              </div>
+                            </td>
+                            <td><h5 class="font-weight-bold mb-0">{{floor1_technical_buf}}%</h5></td>
+                          </tr>
+                        </table>
+                      </div>
+                  <!--  </div>
+                    <div class="col-md-6 mt-3">
+                      <canvas id="north-america-chart"></canvas>
+                      <div id="north-america-legend"></div> -->
+                    </div>
+                <!--  </div> -->
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="row">
+                <div class="col-md-12 col-xl-3 d-flex flex-column justify-content-start">
+                  <div class="ml-xl-4 mt-3">
+                  <p class="card-title">{{reportname_3}}</p>
+                    <h1 class="text-primary">2nd</h1>
+                    <h3 class="font-weight-500 mb-xl-4 text-primary">FLOOR</h3>
+                    <p class="mb-2 mb-xl-0"></p>
+                  </div>
+                  </div>
+                <div class="col-md-12 col-xl-9">
+                  <div class="row">
+                    <div class="col-md-9 border-right">
+                      <div class="table-responsive mb-3 mb-md-0 mt-3">
+                        <table class="table table-borderless report-table">
+                          <tr>
+                            <td class="text-muted">Marketing</td>
+                            <td class="w-100 px-0">
+                              <div class="progress progress-md mx-4">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: {{floor1_marketing_buf}}%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                              </div>
+                            </td>
+                            <td><h5 class="font-weight-bold mb-0">{{floor1_marketing_buf}}%</h5></td>
+                          </tr>
+                          <tr>
+                            <td class="text-muted">Operations</td>
+                            <td class="w-100 px-0">
+                              <div class="progress progress-md mx-4">
+                                <div class="progress-bar bg-warning" role="progressbar" style="width: {{floor1_operations_buf}}%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                              </div>
+                            </td>
+                            <td><h5 class="font-weight-bold mb-0">{{floor1_operations_buf}}%</h5></td>
+                          </tr>
+                          <tr>
+                            <td class="text-muted">Finance</td>
+                            <td class="w-100 px-0">
+                              <div class="progress progress-md mx-4">
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: {{floor1_finance_buf}}%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+                              </div>
+                            </td>
+                            <td><h5 class="font-weight-bold mb-0">{{floor1_finance_buf}}%</h5></td>
+                          </tr>
+                          <tr>
+                            <td class="text-muted">Sales</td>
+                            <td class="w-100 px-0">
+                              <div class="progress progress-md mx-4">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{floor1_sales_buf}}%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                              </div>
+                            </td>
+                            <td><h5 class="font-weight-bold mb-0">{{floor1_sales_buf}}%</h5></td>
+                          </tr>
+                          <tr>
+                            <td class="text-muted">Human Resources</td>
+                            <td class="w-100 px-0">
+                              <div class="progress progress-md mx-4">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: {{floor1_hr_buf}}%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                              </div>
+                            </td>
+                            <td><h5 class="font-weight-bold mb-0">{{floor1_hr_buf}}%</h5></td>
+                          </tr>
+                          <tr>
+                            <td class="text-muted">Technical</td>
+                            <td class="w-100 px-0">
+                              <div class="progress progress-md mx-4">
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: {{floor1_operations_buf}}%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                              </div>
+                            </td>
+                            <td><h5 class="font-weight-bold mb-0">{{floor1_technical_buf}}%</h5></td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mt-3">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <a class="carousel-control-prev" href="#detailedReports" role="button" data-bs-slide="prev"> -->
+            <!-- <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
+          <!-- </a> -->
+          <!-- <a class="carousel-control-next" href="#detailedReports" role="button" data-bs-slide="next"> -->
+            <!-- <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
+          </a>
+        </div>
+      </a>
+      </div>
+    </div>
+  </div>
+</div>
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
         <footer class="footer">
