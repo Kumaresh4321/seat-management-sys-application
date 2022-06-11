@@ -6,6 +6,7 @@ from seats.models import Seat
 # Create your models here.
 class Employee(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
+    employee_id = models.CharField(max_length=50)
     designation_name = models.CharField(max_length=50)
     location_name = models.CharField(max_length=50)
     reporting_to = models.CharField(max_length=50)
@@ -14,7 +15,6 @@ class Employee(models.Model):
         ('ap', 'APAC'),
         ('uk',  'UK'),
     ), default='UK')
-    seat_id = models.IntegerField(null=True)
 
 
 @receiver(post_save, sender=User) #whenever there is a create event for user, create a employee object

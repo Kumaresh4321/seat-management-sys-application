@@ -33,9 +33,9 @@ def returnstats(request):
     floor1_progress_un = []
     floor1_progress_buf = []
     for dept in departments:
-        floor1_progress.append(math.floor(Seat.objects.filter(department_name=dept).filter(state='oc').count()*100/Seat.objects.filter(department_name=dept).count()))
-        floor1_progress_un.append(math.floor(Seat.objects.filter(department_name=dept).filter(state='un').count()*100/Seat.objects.filter(department_name=dept).count()))
-        floor1_progress_buf.append(math.floor(Seat.objects.filter(department_name=dept).filter(state='bu').count()*100/Seat.objects.filter(department_name=dept).count()))
+        floor1_progress.append(math.floor(Seat.objects.filter(department_name=dept).filter(state='oc').count()*100/(Seat.objects.filter(department_name=dept).count() + 1)))
+        floor1_progress_un.append(math.floor(Seat.objects.filter(department_name=dept).filter(state='un').count()*100/(Seat.objects.filter(department_name=dept).count() + 1)))
+        floor1_progress_buf.append(math.floor(Seat.objects.filter(department_name=dept).filter(state='bu').count()*100/(Seat.objects.filter(department_name=dept).count() + 1)))
     print(floor1_progress_un)
     context = {
     'reportname_1': 'Floorwise Report: Occupied Seats',
@@ -177,10 +177,15 @@ def viewseatinfo(request):
     context = {}
     info = request.POST.get('seat_number')[4:]
     context['seat_number'] = info
-    st = Seat.objects.filter(auto_increment_id = info)
+    st = Seat.objects.filter(seat_id = info)
     context['seat_status'] = st[0].state
     context['seat_department_name'] = st[0].department_name
     context['seat_shiftid'] = st[0].shiftid
+    context['employee_id'] = "null"
+    if(st[0].employee_id != "null"):
+        ed = Employee.objects.filter(employee_id = st[0].employee_id)
+        context['employee_id'] = ed[0].employee_id
+        context['employee_designation'] = ed[0].designation_name
     return render(request, 'seatinfo.html', context)
 
 def loadsvg(request):
