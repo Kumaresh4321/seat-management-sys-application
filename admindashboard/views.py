@@ -11,6 +11,9 @@ from reportlab.lib.pagesizes import A4
 from datetime import datetime
 import json
 import math
+from io import StringIO
+import xlsxwriter
+import csv
 
 # json_serializer = serializers.get_serializer("json")
 departments = ['Marketing', 'Operations', 'Finance', 'Sales', 'Human Resources', 'Technical']
@@ -72,9 +75,10 @@ def gen_data(floors, depts, statuses):
     if floors:
         floor_info = {}
         for f in floors:
-            occ = Seat.objects.filter(state='oc').filter(floor_number=f).count()
-            unocc = Seat.objects.filter(state='un').filter(floor_number=f).count()
-            buff = Seat.objects.filter(state='bu').filter(floor_number=f).count()
+            occ = Seat.objects.filter(state='oc').filter(floor_number=f)
+            
+            unocc = Seat.objects.filter(state='un').filter(floor_number=f)
+            buff = Seat.objects.filter(state='bu').filter(floor_number=f)
             floor_info[f] = {
             'Occupied': occ,
             'Unoccupied': unocc,
@@ -84,9 +88,9 @@ def gen_data(floors, depts, statuses):
     if depts:
         dept_info = {}
         for d in depts:
-            occ = Seat.objects.filter(state='oc').filter(department_name=d).count()
-            unocc = Seat.objects.filter(state='un').filter(department_name=d).count()
-            buff = Seat.objects.filter(state='bu').filter(department_name=d).count()
+            occ = Seat.objects.filter(state='oc').filter(department_name=d)
+            unocc = Seat.objects.filter(state='un').filter(department_name=d)
+            buff = Seat.objects.filter(state='bu').filter(department_name=d)
             dept_info[d] = {
             'Occupied': occ,
             'Unoccupied': unocc,
@@ -100,12 +104,12 @@ def gen_data(floors, depts, statuses):
             if s == "Unoccupied": st = "un"
             if s == "Buffer": st = "bu"
             status_info[s] = {
-            'Total' : Seat.objects.filter(state=st).count()
+            'Total' : Seat.objects.filter(state=st)
             }
 
         data['Status'] = status_info
 
-    print(data)
+    # print(data)
 
     return data
 
@@ -113,51 +117,153 @@ def gen_data(floors, depts, statuses):
 @login_required(login_url='/login/')
 def generate_pdf(request):
     if request.method == 'POST':
-        floor_select = request.POST.getlist('floor')
-        dept_select = request.POST.getlist('dept')
-        status_select = request.POST.getlist('status')
-    print(floor_select)
+        floors= request.POST.getlist('floor')
+        depts = request.POST.getlist('dept')
+        statuses = request.POST.getlist('status')
+    # print(floors)
 
-    pdfdata = gen_data(floor_select, dept_select, status_select)
-    response = HttpResponse(content_type='application/pdf')
-    now = datetime.now()
-    d = now.strftime('%Y-%m-%d')
-    response['Content-Disposition'] = f"inline; filename = '{d}.pdf'"
+    data = {}
+    if floors:
+        floor_info = {}
+        for f in floors:
+            occ = Seat.objects.filter(state='oc').filter(floor_number=f)
+            unocc = Seat.objects.filter(state='un').filter(floor_number=f)
+            buff = Seat.objects.filter(state='bu').filter(floor_number=f)
+            floor_info[f] = {
+            'Occupied': occ,
+            'Unoccupied': unocc,
+            'Buffer': buff
+            }
+        data['Floors'] = floor_info
+    if depts:
+        dept_info = {}
+        for d in depts:
+            occ = Seat.objects.filter(state='oc').filter(department_name=d)
+            unocc = Seat.objects.filter(state='un').filter(department_name=d)
+            buff = Seat.objects.filter(state='bu').filter(department_name=d)
+            dept_info[d] = {
+            'Occupied': occ,
+            'Unoccupied': unocc,
+            'Buffer': buff
+            }
+        data['Department'] = dept_info
+    if statuses:
+        status_info = {}
+        for s in statuses:
+            if s == "Occupied": st = "oc"
+            if s == "Unoccupied": st = "un"
+            if s == "Buffer": st = "bu"
+            status_info[s] = {
+            'Total' : Seat.objects.filter(state=st)
+            }
 
-    buffer = BytesIO()
-    p = canvas.Canvas(buffer, pagesize = A4)
+        data['Status'] = status_info
 
-    p.setFont("Helvetica", 15, leading=None)
-    p.drawString(220, 800, "Seat Management System")
-    p.line(0, 780, 1000, 780)
-    p.line(0, 778, 1000, 778)
-    x1 = 20
-    y1 = 750
+    # print(data)
 
-    for key, value in pdfdata.items():
-        y1 = y1 - 22
-        if value:
-            p.setFont("Helvetica", 15, leading=None)
-            p.drawString(x1, y1-12, f"{key}")
-            for k, v in value.items():
-                p.setFont("Helvetica", 15, leading=None)
-                p.drawString(x1+25, y1-32, f"{k}")
-                y1 = y1-20
-                for str, val in v.items():
-                    p.setFont("Helvetica", 15, leading=None)
-                    p.drawString(x1+40, y1-32, f"{str}: {val}")
-                    y1 = y1-20
+    # pdfdata = gen_data(floor_select, dept_select, status_select)
+    # response = HttpResponse(content_type='application/pdf')
+    # now = datetime.now()
+    # d = now.strftime('%Y-%m-%d')
+    # response['Content-Disposition'] = f"inline; filename = '{d}.pdf'"
+
+    # buffer = BytesIO()
+    # p = canvas.Canvas(buffer, pagesize = A4)
+
+    # p.setFont("Helvetica", 15, leading=None)
+    # p.drawString(220, 800, "Seat Management System")
+    # p.line(0, 780, 1000, 780)
+    # p.line(0, 778, 1000, 778)
+    # x1 = 20
+    # y1 = 750
+
+    # for key, value in pdfdata.items():
+    #     y1 = y1 - 22
+    #     if value:
+    #         p.setFont("Helvetica", 15, leading=None)
+    #         p.drawString(x1, y1-12, f"{key}")
+    #         for k, v in value.items():
+    #             p.setFont("Helvetica", 15, leading=None)
+    #             p.drawString(x1+25, y1-32, f"{k}")
+    #             y1 = y1-20
+    #             for str, val in v.items():
+    #                 p.setFont("Helvetica", 15, leading=None)
+    #                 p.drawString(x1+40, y1-32, f"{str}: {val}")
+    #                 y1 = y1-20
 
 
-    p.setTitle(f'Report on {d}')
-    p.showPage()
-    p.save()
+    # p.setTitle(f'Report on {d}')
+    # p.showPage()
+    # p.save()
 
-    pdf = buffer.getvalue()
-    buffer.close()
-    response.write(pdf)
+    # pdf = buffer.getvalue()
+    # buffer.close()
+    # response.write(pdf)
+    # return response
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename=Report.csv'
+	
+	# Create a csv writer
+    writer = csv.writer(response)
+
+    temp = 0
+    if 'Floors' in data:
+            
+        temp1 = 0
+        temp2 = 0
+        if 'Status' in data:
+            for k in statuses:
+                temp1 = 0
+                temp2 = 0
+                if (k == 'Occupied'):
+                    fields = ['Employee ID','First Name','Last Name','Designation','Location Name','Reporting to','Department Head','Shift ID','Tower','Floor Number','Seat Number']
+                    writer.writerow(fields)
+                    writer.writerow('')
+                    for i in floors:
+                        if 'Department' in data:
+                            temp2 = 0
+                            for j in depts:
+                                for d in ((data['Floors'][floors[temp1]][k]) & (data['Department'][depts[temp2]][k])):
+                                    ed = Employee.objects.filter(employee_id = d.employee_id)
+                                    fields_temp = [ed[0].employee_id,ed[0].user.first_name,ed[0].user.last_name,ed[0].designation_name,ed[0].location_name,ed[0].reporting_to,ed[0].department_head,ed[0].shiftid,d.tower_id,d.floor_number,d.seat_number]
+                                    writer.writerow(fields_temp)
+                                temp2 += 1
+                        temp1 += 1
+
+                if (k == 'Buffer'):
+                    writer.writerow('')
+                    fields = ['Shift ID','Tower','Floor Number','Seat Number', 'Seat Status', 'Department']
+                    writer.writerow(fields)
+                    writer.writerow('')
+                    for i in floors:
+                        if 'Department' in data:
+                            temp2 = 0
+                            for j in depts:
+                                for d in ((data['Floors'][floors[temp1]][k]) & (data['Department'][depts[temp2]][k])):
+                                    fields_temp = [d.shiftid,d.tower_id,d.floor_number,d.seat_number,d.state,d.department_name]
+                                    writer.writerow(fields_temp)
+                                temp2 += 1
+                        temp1 += 1
+                                
+                if (temp == temp1):
+                    if ((k == 'Unoccupied')):
+                        writer.writerow('')
+                        fields = ['Shift ID','Tower','Floor Number','Seat Number', 'Seat Status']
+                        writer.writerow(fields)
+                        writer.writerow('')
+                        for i in floors:
+                            if 'Department' in data:
+                                temp2 = 0
+                                for j in depts:
+                                    for d in ((data['Floors'][floors[temp1]][k])):
+                                        fields_temp = [d.shiftid,d.tower_id,d.floor_number,d.seat_number,d.state]
+                                        writer.writerow(fields_temp)
+                                    temp2 += 1
+                            temp1 += 1
+
 
     return response
+
 
 @login_required()
 def viewfloor1(request):

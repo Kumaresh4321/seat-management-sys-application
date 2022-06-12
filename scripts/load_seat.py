@@ -9,7 +9,7 @@ import csv
 
 def run():
     # User = get_user_model()
-    data = csv.reader(open('scripts/seats.csv'), delimiter=",")
+    data = csv.reader(open('scripts/bothFloors.csv'), delimiter=",")
     # User.objects.all().delete()
     # Employee.objects.all().delete()
     for row in data:
