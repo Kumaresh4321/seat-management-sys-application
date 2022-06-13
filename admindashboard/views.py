@@ -39,7 +39,7 @@ def returnstats(request):
         floor1_progress.append(math.floor(Seat.objects.filter(department_name=dept).filter(state='oc').count()*100/(Seat.objects.filter(department_name=dept).count() + 1)))
         floor1_progress_un.append(math.floor(Seat.objects.filter(department_name=dept).filter(state='un').count()*100/(Seat.objects.filter(department_name=dept).count() + 1)))
         floor1_progress_buf.append(math.floor(Seat.objects.filter(department_name=dept).filter(state='bu').count()*100/(Seat.objects.filter(department_name=dept).count() + 1)))
-    print(floor1_progress_un)
+    # print(floor1_progress_un)
     context = {
     'reportname_1': 'Floorwise Report: Occupied Seats',
     'floor1_marketing': floor1_progress[0],
@@ -76,7 +76,7 @@ def gen_data(floors, depts, statuses):
         floor_info = {}
         for f in floors:
             occ = Seat.objects.filter(state='oc').filter(floor_number=f)
-            
+
             unocc = Seat.objects.filter(state='un').filter(floor_number=f)
             buff = Seat.objects.filter(state='bu').filter(floor_number=f)
             floor_info[f] = {
@@ -159,56 +159,15 @@ def generate_pdf(request):
 
         data['Status'] = status_info
 
-    # print(data)
-
-    # pdfdata = gen_data(floor_select, dept_select, status_select)
-    # response = HttpResponse(content_type='application/pdf')
-    # now = datetime.now()
-    # d = now.strftime('%Y-%m-%d')
-    # response['Content-Disposition'] = f"inline; filename = '{d}.pdf'"
-
-    # buffer = BytesIO()
-    # p = canvas.Canvas(buffer, pagesize = A4)
-
-    # p.setFont("Helvetica", 15, leading=None)
-    # p.drawString(220, 800, "Seat Management System")
-    # p.line(0, 780, 1000, 780)
-    # p.line(0, 778, 1000, 778)
-    # x1 = 20
-    # y1 = 750
-
-    # for key, value in pdfdata.items():
-    #     y1 = y1 - 22
-    #     if value:
-    #         p.setFont("Helvetica", 15, leading=None)
-    #         p.drawString(x1, y1-12, f"{key}")
-    #         for k, v in value.items():
-    #             p.setFont("Helvetica", 15, leading=None)
-    #             p.drawString(x1+25, y1-32, f"{k}")
-    #             y1 = y1-20
-    #             for str, val in v.items():
-    #                 p.setFont("Helvetica", 15, leading=None)
-    #                 p.drawString(x1+40, y1-32, f"{str}: {val}")
-    #                 y1 = y1-20
-
-
-    # p.setTitle(f'Report on {d}')
-    # p.showPage()
-    # p.save()
-
-    # pdf = buffer.getvalue()
-    # buffer.close()
-    # response.write(pdf)
-    # return response
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename=Report.csv'
-	
+
 	# Create a csv writer
     writer = csv.writer(response)
 
     temp = 0
     if 'Floors' in data:
-            
+
         temp1 = 0
         temp2 = 0
         if 'Status' in data:
@@ -244,7 +203,7 @@ def generate_pdf(request):
                                     writer.writerow(fields_temp)
                                 temp2 += 1
                         temp1 += 1
-                                
+
                 if (temp == temp1):
                     if ((k == 'Unoccupied')):
                         writer.writerow('')
@@ -292,7 +251,18 @@ def viewseatinfo(request):
         ed = Employee.objects.filter(employee_id = st[0].employee_id)
         context['employee_id'] = ed[0].employee_id
         context['employee_designation'] = ed[0].designation_name
+
     return render(request, 'seatinfo.html', context)
+
+def allocateform(request):
+    return render(request, 'allocationform.html', {})
+
+def allocateseat(request):
+    if request.method == "POST":
+        form = requestForm(request.POST)
+        if form.is_valid():
+            print("form", form)
+    return render(request, 'reports.html', {})
 
 def loadsvg(request):
     return render(request, 'towera.svg', {})
