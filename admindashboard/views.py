@@ -256,7 +256,7 @@ def generate_pdf(request):
                                 temp2 = 0
                                 for j in depts:
                                     for d in ((data['Floors'][floors[temp1]][k])):
-                                        fields_temp = [d.shiftid,d.tower_id,d.floor_number,d.seat_number,d.state]
+                                        fields_temp = [d.shiftid,d.tower_id,d.floor_number,d.seat_number,'unoccupied']
                                         writer.writerow(fields_temp)
                                     temp2 += 1
                             temp1 += 1

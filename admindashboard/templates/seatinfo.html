@@ -15,5 +15,8 @@
     <h2> Employee Id: {{employee_id}}<h2>
     <h2> Employee Designation: {{employee_designation}}</h2>
     {%endif%}
+    {%if seat_status == "un" %}
+    <button href="allocationform.html" target ="#blank">Allocate Seat</button>
+    {%endif%}
   </body>
 </html>
