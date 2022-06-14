@@ -9,3 +9,4 @@ class rel_request(models.Model):
     dh_id=models.CharField(max_length=50)
     reason=models.CharField(blank=True,max_length=500)
     status=models.CharField(max_length=10, default="Pending")
+    #dhstatus=models.CharField(max_length=10, default="Pending")

@@ -21,7 +21,9 @@ def add_req(request):
     if request.method == "POST":
         form = requestForm(request.POST)
         if form.is_valid():
-            form.save()
+            rob=form.save()
+            print(rob)
+            print("WOHOOOOOOOOOO")
             #UserObj = User.objects.get(username=q)
             q=form.cleaned_data['lh_id']
             User = get_user_model()
@@ -36,10 +38,10 @@ def add_req(request):
             em1=em2.department_head
             em=Employee.objects.get(user=em1)
             """
-            uidb64 = urlsafe_base64_encode(force_bytes(current_user.pk))
+            uidb64 = urlsafe_base64_encode(force_bytes(rob.request_id))
             print(uidb64)
             domain=get_current_site(request).domain
-            temp=token_generator.make_token(UserObj)
+            temp=token_generator.make_token(rob)
             print(temp)
             link=reverse('verify',kwargs={'uidb64':uidb64, 'token':temp })
             print(link)
@@ -72,22 +74,27 @@ class VerificationView(View):
         # print(token)
         id = force_text(urlsafe_base64_decode(uidb64))
         #print(id)
-        user = User.objects.get(pk=id)
-            #print("OR2")
-            #print("Heh "+user)
-            #print("OR")
-
+        user = rel_request.objects.get(request_id=id)
+        #print(user)
+        #print(token_generator.check_token(user,token))
         if not token_generator.check_token(user,token):
-                #return HttpResponseRedirect('login'+'?message='+'Request already accepted')
-                print(user.is_active)
+        #         #return HttpResponseRedirect('login'+'?message='+'Request already accepted')
+                print(user.status)
+                print("Already approved")
+        #
+        # if (user.status=="Approved"):
+        #     print("Account already activated")
 
-        if user.is_active:
-                #return HttpResponseRedirect('login')
-            print("YO2")
-        user.is_active = True
+        if (user.status=="Pending"):
+            print("WAEEE")
+            user.status="Approved"
+        #         #return HttpResponseRedirect('login')
+        #     print("YO2")
+        # user.is_active = True
         user.save()
 
         print('Account activated successfully')
+        print(user.status)
         #except Exception as ex:
             #pass
         return render(request, 'accept.html')
