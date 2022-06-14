@@ -183,9 +183,10 @@
             </div>
           </div>
           <center><div class="row">
-            <form class="needs-validation" novalidate method="post" action="{% url /allocateseat/%}">
+            <form class="needs-validation" novalidate method= POST action="">
+
               {%csrf_token %}
-                <div class="form-row align-self-center">
+                <!-- <div class="form-row align-self-center">
                   <div class="col-md-4 mb-3">
                     <label class="mb-1" for="validationCustom01">Employee ID</label>
                     <input type="text" class="form-control text-center" id="validationCustom01" placeholder="Employee ID" value="" required>
@@ -207,8 +208,9 @@
                       <div class="valid-feedback">
                         Looks good!
                       </div>
-                    </div>
-                <button class="btn btn-primary" id="myButton" type="submit">Submit</button>
+                    </div> -->
+                    {{ form.as_p }}
+                <button class="btn btn-primary" id="myButton" type="submit" formaction="/allocateseat/">Submit</button>
               </form>
             </center>
               <script>

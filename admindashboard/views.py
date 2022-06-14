@@ -14,6 +14,7 @@ import math
 from io import StringIO
 import xlsxwriter
 import csv
+from .forms import allocateForm
 
 # json_serializer = serializers.get_serializer("json")
 departments = ['Marketing', 'Operations', 'Finance', 'Sales', 'Human Resources', 'Technical']
@@ -255,13 +256,28 @@ def viewseatinfo(request):
     return render(request, 'seatinfo.html', context)
 
 def allocateform(request):
-    return render(request, 'allocationform.html', {})
+    form = allocateForm(request.POST)
+
+    return render(request, 'allocationform.html', {'form':form})
 
 def allocateseat(request):
     if request.method == "POST":
-        form = requestForm(request.POST)
+        form = allocateForm(request.POST)
         if form.is_valid():
-            print("form", form)
+            empid = form.cleaned_data['employee_id']
+            shiftid = form.cleaned_data['shiftid']
+            floornumber = form.cleaned_data['floor_number']
+            tid = form.cleaned_data['tower_id']
+            sid = form.cleaned_data['seat_number']
+            # seatid = form.cleaned_data['seat_id']
+            summa = Seat.objects.get(seat_number=sid, floor_number=floornumber,tower_id=tid, shiftid=shiftid)
+            summa.employee_id = empid
+            summa.state = 'oc'
+            print(summa.seat_id)
+            summa.save()
+            # print("form", form)
+        else:
+            print(form.errors)
     return render(request, 'reports.html', {})
 
 def loadsvg(request):
