@@ -15,6 +15,8 @@ from io import StringIO
 import xlsxwriter
 import csv
 from .forms import allocateForm
+from request_realloc.models import rel_request
+from django.contrib import messages
 
 # json_serializer = serializers.get_serializer("json")
 departments = ['Marketing', 'Operations', 'Finance', 'Sales', 'Human Resources', 'Technical']
@@ -28,8 +30,14 @@ def dashboard(request):
 
 @login_required(login_url='/login/')
 def requests(request):
-    #context = displayemployee(request, request.user)
-    return render(request, 'allot_req.html', {})
+    allrequests = rel_request.objects.all()
+    if request.method == "POST":
+        messages.success(request,("Mudinchu"))
+        print("hi")
+        return redirect('dashboard')
+    context = {'requests': allrequests}
+    
+    return render(request, 'allot_req.html', context)
 
 @login_required(login_url='/login/')
 def returnstats(request):
@@ -244,6 +252,7 @@ def viewseatinfo(request):
     info = request.POST.get('seat_number')[4:]
     context['seat_number'] = info
     st = Seat.objects.filter(seat_id = info)
+    context['seat_id'] = st[0].seat_id
     context['seat_status'] = st[0].state
     context['seat_department_name'] = st[0].department_name
     context['seat_shiftid'] = st[0].shiftid
@@ -257,7 +266,6 @@ def viewseatinfo(request):
 
 def allocateform(request):
     form = allocateForm(request.POST)
-
     return render(request, 'allocationform.html', {'form':form})
 
 def allocateseat(request):
@@ -271,14 +279,24 @@ def allocateseat(request):
             sid = form.cleaned_data['seat_number']
             # seatid = form.cleaned_data['seat_id']
             summa = Seat.objects.get(seat_number=sid, floor_number=floornumber,tower_id=tid, shiftid=shiftid)
+            emp = Employee.objects.get(employee_id=empid)
             summa.employee_id = empid
             summa.state = 'oc'
-            print(summa.seat_id)
+            summa.department_name = emp.department_name
             summa.save()
             # print("form", form)
         else:
             print(form.errors)
     return render(request, 'reports.html', {})
+
+def deallocateseat(request, seat_id):
+    if request.method == "GET":
+        seat = Seat.objects.get(seat_id=seat_id)
+        seat.department_name = 'null'
+        seat.state = 'un'
+        seat.employee_id = 'null'
+        seat.save()
+    return redirect('viewfloor1')
 
 def loadsvg(request):
     return render(request, 'towera.svg', {})

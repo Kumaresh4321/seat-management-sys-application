@@ -18,5 +18,8 @@
     {%if seat_status == "un"%}
     <button><a href="/allocateform/" target ="_blank">Allocate Seat</a></button>
     {%endif%}
+    {%if seat_status == "oc"%}
+    <button><a href="{% url 'deallocateseat' seat_id %}" target ="_blank">Deallocate Seat</a></button>
+    {%endif%}
   </body>
 </html>

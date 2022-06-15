@@ -12,5 +12,5 @@ urlpatterns = [
     path('viewseatinfo/', views.viewseatinfo, name="viewseatinfo"),
     path('allocateform/', views.allocateform, name="allocateform"),
     path('allocateseat/', views.allocateseat, name="allocateseat"),
-    
+    path('deallocateseat/<int:seat_id>/', views.deallocateseat, name="deallocateseat"),
 ]

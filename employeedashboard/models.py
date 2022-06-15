@@ -15,6 +15,7 @@ class Employee(models.Model):
         ('ap', 'APAC'),
         ('uk',  'UK'),
     ), default='UK')
+    department_name = models.CharField(max_length=50, null=True)
 
 
 @receiver(post_save, sender=User) #whenever there is a create event for user, create a employee object
