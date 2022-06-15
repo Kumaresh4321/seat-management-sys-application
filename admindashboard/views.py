@@ -14,7 +14,7 @@ import math
 from io import StringIO
 import xlsxwriter
 import csv
-from .forms import allocateForm
+from .forms import allocateForm, bufferForm
 from request_realloc.models import rel_request
 from django.contrib import messages
 
@@ -32,8 +32,11 @@ def dashboard(request):
 def requests(request):
     allrequests = rel_request.objects.all()
     if request.method == "POST":
-        messages.success(request,("Mudinchu"))
-        print("hi")
+        id_list = request.POST.getlist('boxes')
+        print(id_list)
+        for x in id_list:
+            print(x)
+            rel_request.objects.filter(pk=int(x)).update(approved=True)
         return redirect('dashboard')
     context = {'requests': allrequests}
     
@@ -283,6 +286,29 @@ def allocateseat(request, seat_id):
         summa.employee_id = empid
         summa.state = 'oc'
         summa.department_name = emp.department_name
+        summa.save()
+    else:
+        print(form.errors)
+    return redirect('viewfloor1')
+
+def bufferform(request, seat_id):
+    context={}
+    form = bufferForm(request.POST)
+    context['seat_id'] = seat_id
+    context['form'] = form
+    print("hello")
+    return render(request, 'bufferform.html', context)
+
+def bufferseat(request, seat_id):
+    print(seat_id)
+    # if request.method == "POST":
+    form = bufferForm(request.POST)
+    if form.is_valid():
+        print("vanakam")
+        dept = form.cleaned_data['department_name']
+        summa = Seat.objects.get(seat_id=seat_id)
+        summa.state = 'bu'
+        summa.department_name = dept
         summa.save()
     else:
         print(form.errors)

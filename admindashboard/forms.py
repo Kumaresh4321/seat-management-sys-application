@@ -6,3 +6,8 @@ class allocateForm(ModelForm):
     class Meta:
         model = Seat
         fields = ('employee_id',)
+
+class bufferForm(ModelForm):
+    class Meta:
+        model = Seat
+        fields = ('department_name',)
