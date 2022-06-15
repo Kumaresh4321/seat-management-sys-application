@@ -34,7 +34,7 @@
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-bs-toggle="minimize">
           <span class="icon-menu"></span>
         </button>
-        {% comment %} <ul class="navbar-nav mr-lg-2">
+        <ul class="navbar-nav mr-lg-2">
           <li class="nav-item nav-search d-none d-lg-block">
             <div class="input-group">
               <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
@@ -45,7 +45,7 @@
               <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
             </div>
           </li>
-        </ul> {% endcomment %}
+        </ul>
         <ul class="navbar-nav navbar-nav-right">
           <li class="nav-item dropdown">
             <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
@@ -183,46 +183,19 @@
             </div>
           </div>
           <center><div class="row">
-            <form class="needs-validation" novalidate>
-                <div class="form-row align-self-center">
-                  <div class="col-md-4 mb-3">
-                    <label class="mb-1" for="validationCustom01">Line Head's Name</label>
-                    <input type="text" class="form-control text-center" id="validationCustom01" placeholder="Line Head's Name" value="" required>
-                    <div class="valid-feedback">
-                      Looks good!
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb-3">
-                    <label class="mb-1" for="validationCustom01">Line Head's ID</label>
-                    <input type="text" class="form-control text-center" id="validationCustom02" placeholder="Line Head's ID" value="" required>
-                    <div class="valid-feedback">
-                      Looks good!
-                    </div>
-                  </div>
-                  <div class="form-row">
-                    <div class="col-md-4 mb-3 mt-2">
-                        <label class="mb-1" for="validationCustom01">Dept Head's Name</label>
-                      <input type="text" class="form-control text-center" id="validationCustom03" placeholder="Dept Head's Name" value="" required>
-                      <div class="valid-feedback">
-                        Looks good!
-                      </div>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label class="mb-1" for="validationCustom01">Dept Head's ID</label>
-                      <input type="text" class="form-control text-center" id="validationCustom04" placeholder="Dept Head's ID" value="" required>
-                      <div class="valid-feedback">
-                        Looks good!
-                      </div>
-                    </div>
-                    <div class="col-md-4 mb-3 mt-2">
-                      <label class="mb-1" for="validationCustom01">Reason</label>
-                      <textarea type="text" class="form-control text-center" id="validationCustom05" placeholder="Reason" rows="10" required></textarea>
-                      <div class="valid-feedback">
-                        Looks good!
-                      </div>
-                    </div>
-                <button class="btn btn-primary" id="myButton" type="submit">Submit</button>
+            {% if submitted %}
+              Your request was submitted successfully.
+
+
+            {% else %}
+
+              <form class="needs-validation" novalidate action="" method=POST>
+                {%csrf_token %}
+                {{ form.as_p }}
+
+                  <button class="btn btn-primary" id="myButton" type="submit">Submit</button>
               </form>
+            {% endif %}
             </center>
 
               <script>
