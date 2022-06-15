@@ -264,30 +264,29 @@ def viewseatinfo(request):
 
     return render(request, 'seatinfo.html', context)
 
-def allocateform(request):
+def allocateform(request, seat_id):
+    context={}
     form = allocateForm(request.POST)
-    return render(request, 'allocationform.html', {'form':form})
+    context['seat_id'] = seat_id
+    context['form'] = form
+    print("hello")
+    return render(request, 'allocationform.html', context)
 
-def allocateseat(request):
-    if request.method == "POST":
-        form = allocateForm(request.POST)
-        if form.is_valid():
-            empid = form.cleaned_data['employee_id']
-            shiftid = form.cleaned_data['shiftid']
-            floornumber = form.cleaned_data['floor_number']
-            tid = form.cleaned_data['tower_id']
-            sid = form.cleaned_data['seat_number']
-            # seatid = form.cleaned_data['seat_id']
-            summa = Seat.objects.get(seat_number=sid, floor_number=floornumber,tower_id=tid, shiftid=shiftid)
-            emp = Employee.objects.get(employee_id=empid)
-            summa.employee_id = empid
-            summa.state = 'oc'
-            summa.department_name = emp.department_name
-            summa.save()
-            # print("form", form)
-        else:
-            print(form.errors)
-    return render(request, 'reports.html', {})
+def allocateseat(request, seat_id):
+    print(seat_id)
+    # if request.method == "POST":
+    form = allocateForm(request.POST)
+    if form.is_valid():
+        empid = form.cleaned_data['employee_id']
+        summa = Seat.objects.get(seat_id=seat_id)
+        emp = Employee.objects.get(employee_id=empid)
+        summa.employee_id = empid
+        summa.state = 'oc'
+        summa.department_name = emp.department_name
+        summa.save()
+    else:
+        print(form.errors)
+    return redirect('viewfloor1')
 
 def deallocateseat(request, seat_id):
     if request.method == "GET":

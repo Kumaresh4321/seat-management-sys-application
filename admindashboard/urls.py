@@ -10,7 +10,7 @@ urlpatterns = [
     path('viewfloor1/', views.viewfloor1, name='viewfloor1'),
     path('viewfloor1/towera.svg', views.loadsvg, name='loadsvg'),
     path('viewseatinfo/', views.viewseatinfo, name="viewseatinfo"),
-    path('allocateform/', views.allocateform, name="allocateform"),
-    path('allocateseat/', views.allocateseat, name="allocateseat"),
+    path('allocateform/<int:seat_id>/', views.allocateform, name="allocateform"),
+    path('allocateseat/<int:seat_id>/', views.allocateseat, name="allocateseat"),
     path('deallocateseat/<int:seat_id>/', views.deallocateseat, name="deallocateseat"),
 ]

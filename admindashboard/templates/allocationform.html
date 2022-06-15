@@ -210,7 +210,7 @@
                       </div>
                     </div> -->
                     {{ form.as_p }}
-                <button class="btn btn-primary" id="myButton" type="submit" formaction="/allocateseat/">Submit</button>
+                <button class="btn btn-primary" id="myButton" type="submit" formaction="{% url 'allocateseat' seat_id %}" target ="_blank">Submit</button>
               </form>
             </center>
               <script>
