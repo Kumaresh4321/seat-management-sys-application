@@ -10,6 +10,7 @@ from reportlab.lib.pagesizes import letter, landscape
 from reportlab.lib.pagesizes import A4
 from datetime import datetime
 import json
+import math
 
 # json_serializer = serializers.get_serializer("json")
 departments = ['Marketing', 'Operations', 'Finance', 'Sales', 'Human Resources', 'Technical']
@@ -29,16 +30,35 @@ def requests(request):
 @login_required(login_url='/login/')
 def returnstats(request):
     floor1_progress = []
+    floor1_progress_un = []
+    floor1_progress_buf = []
     for dept in departments:
-        floor1_progress.append(Seat.objects.filter(department_name=dept).filter(state='oc').count()*100/Seat.objects.filter(department_name=dept).count())
+        floor1_progress.append(math.floor(Seat.objects.filter(department_name=dept).filter(state='oc').count()*100/(Seat.objects.filter(department_name=dept).count() + 1)))
+        floor1_progress_un.append(math.floor(Seat.objects.filter(department_name=dept).filter(state='un').count()*100/(Seat.objects.filter(department_name=dept).count() + 1)))
+        floor1_progress_buf.append(math.floor(Seat.objects.filter(department_name=dept).filter(state='bu').count()*100/(Seat.objects.filter(department_name=dept).count() + 1)))
+    print(floor1_progress_un)
     context = {
-    'reportname': 'Floorwise Report',
+    'reportname_1': 'Floorwise Report: Occupied Seats',
     'floor1_marketing': floor1_progress[0],
     'floor1_operations': floor1_progress[1],
     'floor1_finance': floor1_progress[2],
     'floor1_sales': floor1_progress[3],
     'floor1_hr': floor1_progress[4],
     'floor1_technical': floor1_progress[5],
+    'reportname_2': 'Floorwise Report: Unoccupied Seats',
+    'floor1_marketing_un': floor1_progress_un[0],
+    'floor1_operations_un': floor1_progress_un[1],
+    'floor1_finance_un': floor1_progress_un[2],
+    'floor1_sales_un': floor1_progress_un[3],
+    'floor1_hr_un': floor1_progress_un[4],
+    'floor1_technical_un': floor1_progress_un[5],
+    'reportname_3': 'Floorwise Report: Buffer Seats',
+    'floor1_marketing_buf': floor1_progress_buf[0],
+    'floor1_operations_buf': floor1_progress_buf[1],
+    'floor1_finance_buf': floor1_progress_buf[2],
+    'floor1_sales_buf': floor1_progress_buf[3],
+    'floor1_hr_buf': floor1_progress_buf[4],
+    'floor1_technical_buf': floor1_progress_buf[5],
     }
     print(context)
     return context
@@ -78,7 +98,7 @@ def gen_data(floors, depts, statuses):
         for s in statuses:
             if s == "Occupied": st = "oc"
             if s == "Unoccupied": st = "un"
-            if s == "Buffer": st = "buff"
+            if s == "Buffer": st = "bu"
             status_info[s] = {
             'Total' : Seat.objects.filter(state=st).count()
             }
@@ -157,10 +177,15 @@ def viewseatinfo(request):
     context = {}
     info = request.POST.get('seat_number')[4:]
     context['seat_number'] = info
-    st = Seat.objects.filter(auto_increment_id = info)
+    st = Seat.objects.filter(seat_id = info)
     context['seat_status'] = st[0].state
     context['seat_department_name'] = st[0].department_name
     context['seat_shiftid'] = st[0].shiftid
+    context['employee_id'] = "null"
+    if(st[0].employee_id != "null"):
+        ed = Employee.objects.filter(employee_id = st[0].employee_id)
+        context['employee_id'] = ed[0].employee_id
+        context['employee_designation'] = ed[0].designation_name
     return render(request, 'seatinfo.html', context)
 
 def loadsvg(request):

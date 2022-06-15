@@ -11,5 +11,9 @@
     <h2> Seat Status: {{seat_status}}</h2>
     <h2> Seat Department: {{seat_department_name}}<h2>
     <h2> Seat Shift: {{seat_shiftid}}</h2>
+    {%if employee_id != "null" %}
+    <h2> Employee Id: {{employee_id}}<h2>
+    <h2> Employee Designation: {{employee_designation}}</h2>
+    {%endif%}
   </body>
 </html>

@@ -4,7 +4,7 @@ from django.db.models import Value
 
 class Seat(models.Model):
     seat_number = models.IntegerField()
-    floor_number = models.CharField(max_length=6, choices=(('One','One'),
+    floor_number = models.CharField(max_length=6, choices=(('One','Two'),
     ('One', 'Two')))
     tower_id = models.CharField(max_length=6, choices=(('A', 'Tower A'),('B', 'Tower B')))
     state = models.CharField(max_length=6, choices=(
@@ -17,4 +17,5 @@ class Seat(models.Model):
         ('uk',  'UK'),
     ), default='UK')
     department_name = models.CharField(max_length=50, null=True)
-    auto_increment_id = models.AutoField(primary_key=True)
+    seat_id = models.IntegerField(primary_key=True, default = 0)
+    employee_id = models.CharField(max_length=50, default="null")
