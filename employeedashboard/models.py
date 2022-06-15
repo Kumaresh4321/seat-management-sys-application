@@ -16,6 +16,11 @@ class Employee(models.Model):
         ('uk',  'UK'),
     ), default='UK')
     department_name = models.CharField(max_length=50, null=True)
+    seat_id = models.IntegerField(default = 0)
+    reallocation_status = models.CharField(max_length=10, choices=(
+        ('active', 'ACTIVE'),
+        ('inactive', 'INACTIVE'),
+    ), default='INACTIVE')
 
 
 @receiver(post_save, sender=User) #whenever there is a create event for user, create a employee object

@@ -36,8 +36,17 @@ def requests(request):
         print(id_list)
         for x in id_list:
             print(x)
-            rel_request.objects.filter(pk=int(x)).update(approved=True)
-        return redirect('dashboard')
+            r = rel_request.objects.filter(pk=int(x))
+            e = Employee.objects.get(employee_id=r[0].employee_id)
+            s = Seat.objects.get(seat_id=e.seat_id)
+            e.seat_id = 0
+            s.employee_id = 'null'
+            s.state = 'un'
+            s.department_name = 'null'
+            e.reallocation_status = 'active'
+            e.save()
+            s.save()
+        return redirect('viewfloor1')
     context = {'requests': allrequests}
     
     return render(request, 'allot_req.html', context)
@@ -262,10 +271,33 @@ def viewseatinfo(request):
     context['employee_id'] = "null"
     if(st[0].employee_id != "null"):
         ed = Employee.objects.filter(employee_id = st[0].employee_id)
+        context['name'] = ed[0].user.first_name + ' ' + ed[0].user.last_name
         context['employee_id'] = ed[0].employee_id
         context['employee_designation'] = ed[0].designation_name
-
+    if(st[0].employee_id == "null"):
+        e_empty = Employee.objects.filter(seat_id = 0)
+        context['no_seat'] = e_empty
+        # context['employee_name'] = 
     return render(request, 'seatinfo.html', context)
+
+def allot(request, seat_id):
+    # if request.method == "POST":
+    id_list = request.POST.getlist('boxess')
+    print(id_list)
+    e = Employee.objects.get(employee_id=id_list[0])
+    s = Seat.objects.get(seat_id=seat_id)
+    if (e.reallocation_status == 'active'):
+        r = rel_request.objects.get(employee_id=id_list[0])
+        r.approved = True
+        r.save()
+    s.employee_id = e.employee_id
+    s.state = 'oc'
+    e.seat_id = seat_id
+    s.save()
+    e.save()
+    # if request.method == "POST":
+
+    return redirect('viewfloor1')
 
 def allocateform(request, seat_id):
     context={}
@@ -317,11 +349,16 @@ def bufferseat(request, seat_id):
 def deallocateseat(request, seat_id):
     if request.method == "GET":
         seat = Seat.objects.get(seat_id=seat_id)
+        emp = Employee.objects.get(seat_id=seat_id)
         seat.department_name = 'null'
         seat.state = 'un'
         seat.employee_id = 'null'
+        emp.seat_id = 0
         seat.save()
+        emp.save()
     return redirect('viewfloor1')
 
 def loadsvg(request):
     return render(request, 'towera.svg', {})
+
+

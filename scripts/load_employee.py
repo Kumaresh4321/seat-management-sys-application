@@ -31,5 +31,8 @@ def run():
             Post1.location_name = row[8]
             Post1.reporting_to = row[9]
             Post1.department_head = row[10]
-            Post1.shift = row[11]
+            Post1.shiftid = row[11]
+            Post1.department_name = row[12]
+            Post1.seat_id = row[13]
+            Post1.reallocation_status = row[14]
             Post1.save()

@@ -12,19 +12,98 @@
     <h2> Seat Department: {{seat_department_name}}<h2>
     <h2> Seat Shift: {{seat_shiftid}}</h2>
     {%if employee_id != "null" %}
-    <h2> Employee Id: {{employee_id}}<h2>
+    <h2> Employee Name: {{name}}</h2>
+    <h2> Employee Id: {{employee_id}}</h2>
     <h2> Employee Designation: {{employee_designation}}</h2>
     {%endif%}
     {%if seat_status == "un"%}
-    <button><a href="{% url 'allocateform' seat_id %}" target ="_blank">Allocate Seat</a></button>
+    <!-- <button><a href="{% url 'allocateform' seat_id %}" target ="_blank">Allocate Seat</a></button> -->
     <button><a href="{% url 'bufferform' seat_id %}" target ="_blank">Assign Buffer Seat</a></button>
+    <br/>
+    <br/>
+
+    <form action="" method="POST">
+      {%csrf_token%}
+    
+    <div class="table-responsive">
+      <table id="order-listing" class="table">
+        <thead>
+          <tr>
+            <th>S.No</th>
+            <!-- <th>Request ID</th> -->
+            <th>Employee Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Department</th>
+            <th>Reallocation Status</th>
+            <th>To Allocate</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for emp in no_seat %}
+          <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{emp.employee_id}}</td>
+            <td>{{emp.user.first_name}}</td>
+            <td>{{emp.user.last_name}}</td>
+            <td>{{emp.department_name}}</td>
+            <td>{{emp.reallocation_status}}</td>
+            <td><div class = "form-check"><input class="form-check-input" type="checkbox" value="{{emp.employee_id}}" name="boxess"></div></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <br/>
+      <button class="btn btn-primary" id="myButton" type="submit" formaction="{% url 'allot' seat_id %}">Update</button>
+    </form>
+
     {%endif%}
     {%if seat_status == "bu"%}
-    <button><a href="{% url 'allocateform' seat_id %}" target ="_blank">Allocate Seat</a></button>
+    <!-- <button><a href="{% url 'allocateform' seat_id %}" target ="_blank">Allocate Seat</a></button> -->
+    <button><a href="{% url 'bufferform' seat_id %}" target ="_blank">Assign Buffer Seat</a></button>
+    <br/>
+    <br/>
+
+    <form action="" method="POST">
+      {%csrf_token%}
+    
+    <div class="table-responsive">
+      <table id="order-listing" class="table">
+        <thead>
+          <tr>
+            <th>S.No</th>
+            <!-- <th>Request ID</th> -->
+            <th>Employee Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Department</th>
+            <th>Reallocation Status</th>
+            <th>To Allocate</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for emp in no_seat %}
+          <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{emp.employee_id}}</td>
+            <td>{{emp.user.first_name}}</td>
+            <td>{{emp.user.last_name}}</td>
+            <td>{{emp.department_name}}</td>
+            <td>{{emp.reallocation_status}}</td>
+            <td><div class = "form-check"><input class="form-check-input" type="checkbox" value="{{emp.employee_id}}" name="boxess"></div></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <br/>
+      <button class="btn btn-primary" id="myButton" type="submit" formaction="{% url 'allot' seat_id %}">Update</button>
+    </form>
     <button><a href="{% url 'deallocateseat' seat_id %}" target ="_blank">Deallocate Seat</a></button>
     {%endif%}
     {%if seat_status == "oc"%}
     <button><a href="{% url 'deallocateseat' seat_id %}" target ="_blank">Deallocate Seat</a></button>
     {%endif%}
+
+    
   </body>
 </html>
