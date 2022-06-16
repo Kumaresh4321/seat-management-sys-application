@@ -27,6 +27,7 @@ def add_req(request):
             #UserObj = User.objects.get(username=q)
             q=form.cleaned_data['lh_id']
             q2 = form.cleaned_data['dh_id']
+            reas=form.cleaned_data['reason']
             User = get_user_model()
             UserObj =  User.objects.get(username=q)
             UserObj2 = User.objects.get(username=q2)
@@ -57,8 +58,8 @@ def add_req(request):
             print(link)
             activate_url = 'http://'+domain+link
             activate_url2 = 'http://'+domain+link2
-            email_bod = 'Hi line head '+UserObj.username+', Please use this link to give permission to '+current_user.username+ ' to change seats.\n' + activate_url
-            email_bod2 = 'Hi department head'+UserObj2.username+', Please use this link to give permission to '+current_user.username+ ' to change seats.\n' + activate_url2
+            email_bod = 'Hi line head '+UserObj.first_name+', Please use this link to give permission to '+current_user.first_name + ' ' + current_user.last_name + ' to change seats.\n' + activate_url + '\n\nThe reaseon stated for the request was :\n' + reas
+            email_bod2 = 'Hi department head '+UserObj2.first_name+', Please use this link to give permission to '+current_user.first_name + ' ' + current_user.last_name+ ' to change seats.\n' + activate_url2 + '\n\nThe reaseon stated for the request was :\n' + reas
 
 
 
