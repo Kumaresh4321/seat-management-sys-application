@@ -24,4 +24,3 @@ def run():
         Post.seat_id = row[7]
         Post.employee_id = row[8]
         Post.save()
-    print("poda sunni")
