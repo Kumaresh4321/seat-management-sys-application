@@ -264,7 +264,7 @@ def viewseatinfo(request):
     info = request.POST.get('seat_number')[4:]
     context['seat_number'] = info
     st = Seat.objects.filter(seat_id = info)
-    context['seat_id'] = st[0].seat_id
+    context['seat_id'] = int(st[0].seat_id)
     context['seat_status'] = st[0].state
     context['seat_department_name'] = st[0].department_name
     context['seat_shiftid'] = st[0].shiftid
@@ -274,8 +274,8 @@ def viewseatinfo(request):
         context['name'] = ed[0].user.first_name + ' ' + ed[0].user.last_name
         context['employee_id'] = ed[0].employee_id
         context['employee_designation'] = ed[0].designation_name
-    if(st[0].employee_id == "null"):
-        e_empty = Employee.objects.filter(seat_id = 0)
+    if((st[0].employee_id == "null") & (st[0].department_name != "null")):
+        e_empty = Employee.objects.filter(seat_id = 0, department_name=st[0].department_name)
         context['no_seat'] = e_empty
         # context['employee_name'] = 
     return render(request, 'seatinfo.html', context)
@@ -295,6 +295,23 @@ def allot(request, seat_id):
     e.seat_id = seat_id
     s.save()
     e.save()
+    # if request.method == "POST":
+
+    return redirect('viewfloor1')
+
+def buffer(request, seat_id):
+    # if request.method == "POST":
+    dept = request.POST.getlist('box')
+    print(dept)
+    s = Seat.objects.get(seat_id=seat_id)
+    s.state = 'bu'
+    s.department_name = dept[0]
+    if(s.employee_id != 'null'):
+        e = Employee.objects.get(employee_id=s.employee_id)
+        e.seat_id = 0
+        e.save()
+    s.employee_id = 'null'
+    s.save()
     # if request.method == "POST":
 
     return redirect('viewfloor1')

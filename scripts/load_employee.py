@@ -19,7 +19,7 @@ def run():
         Post.password = make_password(row[2])
         Post.first_name = row [4]
         Post.last_name = row[5]
-        Post.email_address = row[6]
+        Post.email = row[6]
         Post.is_active ="1"
         if row[6].find("Admin") != -1:
             Post.is_staff = "1"

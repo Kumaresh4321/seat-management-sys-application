@@ -16,4 +16,5 @@ urlpatterns = [
     path('bufferseat/<int:seat_id>/', views.bufferseat, name="bufferseat"),
     path('deallocateseat/<int:seat_id>/', views.deallocateseat, name="deallocateseat"),
     path('allot/<int:seat_id>/', views.allot, name="allot"),
+    path('buffer/<int:seat_id>/', views.buffer, name="buffer"),
 ]
